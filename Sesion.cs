@@ -31,6 +31,9 @@ public sealed class Session
     public LIN.Types.Auth.Models.AccountModel Account { get; private set; }
 
 
+    public string AccountToken { get; set; }
+
+
 
     /// <summary>
     /// Si la sesión es activa
@@ -43,25 +46,28 @@ public sealed class Session
     /// <summary>
     /// Recarga o inicia una sesión
     /// </summary>
-    public static async Task<(Session? Sesion, Responses Response)> LoginWith(int id)
+    public static async Task<(Session? Sesion, Responses Response)> LoginWith(string user, string password)
     {
 
         // Cierra la sesión Actual
         CloseSession();
 
         // Validación de user
-        var response = await Controllers.Profile.ReadOneAsync(id);
+        var response = await Controllers.Profile.Login(user, password);
+
 
         if (response.Response != Responses.Success)
             return (null, response.Response);
 
 
         // Datos de la instancia
-        Instance.Informacion = response.Model;
+        Instance.Informacion = response.Model.Profile;
+        Instance.Account = response.Model.Account;
 
         IsOpen = true;
 
         Instance.Token = response.Token;
+        Instance.AccountToken = response.Model.LINAuthToken;
 
         return (Instance, Responses.Success);
 
