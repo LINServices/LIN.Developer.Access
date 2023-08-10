@@ -5,11 +5,18 @@ public static class Project
 {
 
 
-    public async static Task<CreateResponse> Create(ProjectDataModel modelo)
+    /// <summary>
+    /// Crea un nuevo proyecto
+    /// </summary>
+    /// <param name="modelo">Modelo del proyecto</param>
+    /// <param name="token">Token de acceso</param>
+    public async static Task<CreateResponse> Create(ProjectDataModel modelo, string token)
     {
 
         // Variables
         var client = new HttpClient();
+
+        client.DefaultRequestHeaders.Add("token", token);
 
         string url = ApiServer.PathURL("project/create");
         string json = JsonConvert.SerializeObject(modelo);
@@ -19,7 +26,7 @@ public static class Project
             // Contenido
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
-            // Envia la solicitud
+            // Envía la solicitud
             HttpResponseMessage response = await client.PostAsync(url, content);
 
             // Lee la respuesta del servidor
@@ -40,6 +47,10 @@ public static class Project
 
 
 
+    /// <summary>
+    /// Obtiene los proyectos asociados a un perfil
+    /// </summary>
+    /// <param name="token">Token de acceso</param>
     public async static Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token)
     {
 
@@ -80,6 +91,11 @@ public static class Project
 
 
 
+    /// <summary>
+    /// Obtiene un proyecto
+    /// </summary>
+    /// <param name="id">ID del proyecto</param>
+    /// <param name="token">Token de acceso</param>
     public async static Task<ReadOneResponse<ProjectDataModel>> ReadOne(int id, string token)
     {
 
@@ -121,6 +137,11 @@ public static class Project
 
 
 
+    /// <summary>
+    /// Elimina un proyecto
+    /// </summary>
+    /// <param name="id">ID del proyecto</param>
+    /// <param name="token">Token de acceso</param>
     public async static Task<ReadOneResponse<bool>> Delete(int id, string token)
     {
 
