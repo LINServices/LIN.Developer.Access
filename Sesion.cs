@@ -5,6 +5,7 @@ global using System.Text;
 global using System.Threading.Tasks;
 global using LIN.Developer.Types.Enumerations;
 global using LIN.Shared.Tools;
+global using LIN.Types.Responses;
 
 namespace LIN.Access.Developer
 {

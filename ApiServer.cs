@@ -1,5 +1,4 @@
 ﻿global using LIN.Developer.Types.Models;
-global using LIN.Shared.Responses;
 
 namespace LIN.Access.Developer;
 
