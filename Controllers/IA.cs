@@ -1,5 +1,5 @@
 ﻿namespace LIN.Access.Developer.Controllers;
-
+using LIN.Types.Enumerations;
 
 public class IA
 {
@@ -10,7 +10,7 @@ public class IA
     /// </summary>
     /// <param name="value">Valor a predecir</param>
     /// <param name="key">Llave</param>
-    public async static Task<ReadOneResponse<Shared.Enumerations.Sentiment>> SentimentIA(string value, string key)
+    public async static Task<ReadOneResponse<Sentiments>> SentimentIA(string value, string key)
     {
 
         // Variables
@@ -31,7 +31,7 @@ public class IA
             // Lee la respuesta del servidor
             string responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<Shared.Enumerations.Sentiment>>(responseContent) ?? new();
+            var obj = JsonConvert.DeserializeObject<ReadOneResponse<Sentiments>>(responseContent) ?? new();
 
             return obj ?? new();
 
@@ -51,7 +51,7 @@ public class IA
     /// </summary>
     /// <param name="value">Valor a predecir</param>
     /// <param name="key">Llave</param>
-    public async static Task<ReadOneResponse<Shared.Enumerations.LangEnum>> LangIA(string value, string key)
+    public async static Task<ReadOneResponse<Languajes>> LangIA(string value, string key)
     {
 
         // Variables
@@ -73,7 +73,7 @@ public class IA
             // Lee la respuesta del servidor
             string responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<Shared.Enumerations.LangEnum>>(responseContent) ?? new();
+            var obj = JsonConvert.DeserializeObject<ReadOneResponse<Languajes>>(responseContent) ?? new();
 
             return obj ?? new();
 

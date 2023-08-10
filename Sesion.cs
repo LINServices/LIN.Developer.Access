@@ -25,6 +25,12 @@ public sealed class Session
     public ProfileDataModel Informacion { get; private set; }
 
 
+    /// <summary>
+    /// Información del usuario
+    /// </summary>
+    public LIN.Types.Auth.Models.AccountModel Account { get; private set; }
+
+
 
     /// <summary>
     /// Si la sesión es activa
