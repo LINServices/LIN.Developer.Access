@@ -22,13 +22,13 @@ public sealed class Session
     /// <summary>
     /// Información del usuario
     /// </summary>
-    public ProfileDataModel Informacion { get; private set; }
+    public ProfileDataModel Informacion { get; private set; } = new();
 
 
     /// <summary>
     /// Información del usuario
     /// </summary>
-    public LIN.Types.Auth.Models.AccountModel Account { get; private set; }
+    public LIN.Types.Auth.Models.AccountModel Account { get; private set; } = new();
 
 
     public string AccountToken { get; set; }
@@ -72,6 +72,40 @@ public sealed class Session
         return (Instance, Responses.Success);
 
     }
+
+
+
+    /// <summary>
+    /// Recarga o inicia una sesión
+    /// </summary>
+    public static async Task<(Session? Sesion, Responses Response)> LoginWith(string token)
+    {
+
+        // Cierra la sesión Actual
+        CloseSession();
+
+        // Validación de user
+        var response = await Controllers.Profile.Login(token);
+
+
+        if (response.Response != Responses.Success)
+            return (null, response.Response);
+
+
+        // Datos de la instancia
+        Instance.Informacion = response.Model.Profile;
+        Instance.Account = response.Model.Account;
+
+        IsOpen = true;
+
+        Instance.Token = response.Token;
+        Instance.AccountToken = response.Model.LINAuthToken;
+
+        return (Instance, Responses.Success);
+
+    }
+
+
 
 
 

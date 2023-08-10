@@ -146,6 +146,55 @@ public static class Profile
 
 
 
+    /// <summary>
+    /// Inicia una sesion
+    /// </summary>
+    public async static Task<ReadOneResponse<Types.Auth.Abstracts.AuthModel<ProfileDataModel>>> Login(string token)
+    {
+
+        // Crear HttpClient
+        using var httpClient = new HttpClient();
+
+        // ApiServer de la solicitud GET
+        string url = ApiServer.PathURL("profile/login/token");
+
+
+        url = Web.AddParameters(url, new(){
+            {"token", token }
+        });
+
+
+        try
+        {
+
+            // Hacer la solicitud GET
+            var response = await httpClient.GetAsync(url);
+
+            // Leer la respuesta como una cadena
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            var obj = JsonConvert.DeserializeObject<ReadOneResponse<Types.Auth.Abstracts.AuthModel<ProfileDataModel>>>(responseBody);
+
+            return obj ?? new();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error al hacer la solicitud GET: {e.Message}");
+        }
+
+
+        return new();
+
+
+
+
+
+    }
+
+
+
+
 
 
 
@@ -391,7 +440,7 @@ public static class Profile
 
 
 
-    public async static Task<ReadAllResponse<TransactionDataModel>> ReadAllAsync(int id)
+    public async static Task<ReadAllResponse<TransactionDataModel>> ReadAllAsync(int id, string token)
     {
 
         // Crear HttpClient
@@ -403,6 +452,7 @@ public static class Profile
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Add("id", $"{id}");
+        request.Headers.Add("token", $"{token}");
 
         try
         {
