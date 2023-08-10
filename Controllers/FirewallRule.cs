@@ -5,11 +5,18 @@ public static class FirewallRule
 {
 
 
-    public async static Task<CreateResponse> Create(FirewallRuleDataModel modelo)
+    /// <summary>
+    /// Crea una regla de firewall
+    /// </summary>
+    /// <param name="modelo">Modelo de la regla</param>
+    /// <param name="token">Token de acceso</param>
+    public async static Task<CreateResponse> Create(FirewallRuleDataModel modelo, string token)
     {
 
         // Variables
         var client = new HttpClient();
+
+        client.DefaultRequestHeaders.Add("token", token);
 
         string url = ApiServer.PathURL("firewallrules/create");
         string json = JsonConvert.SerializeObject(modelo);
@@ -40,8 +47,12 @@ public static class FirewallRule
 
 
 
-
-    public async static Task<ReadAllResponse<FirewallRuleDataModel>> ReadAllAsync(int id)
+    /// <summary>
+    /// Obtiene las reglas de firewall
+    /// </summary>
+    /// <param name="id">ID del proyecto</param>
+    /// <param name="token">Token de acceso</param>
+    public async static Task<ReadAllResponse<FirewallRuleDataModel>> ReadAllAsync(int id, string token)
     {
 
         // Crear HttpClient
@@ -53,6 +64,7 @@ public static class FirewallRule
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Add("id", $"{id}");
+        request.Headers.Add("token", $"{token}");
 
         try
         {
@@ -81,7 +93,11 @@ public static class FirewallRule
 
 
 
-
+    /// <summary>
+    /// Elimina una regla de acceso
+    /// </summary>
+    /// <param name="id">ID de la regla</param>
+    /// <param name="token">Token de acceso</param>
     public async static Task<ResponseBase> Delete(int id, string token)
     {
 
@@ -122,6 +138,12 @@ public static class FirewallRule
     }
 
 
+
+    /// <summary>
+    /// Elimina los accesos bloqueados por el firewall
+    /// </summary>
+    /// <param name="id">id del proyecto</param>
+    /// <param name="token">Token de acceso</param>
     public async static Task<ResponseBase> DeleteBasAccess(int id, string token)
     {
 
@@ -163,10 +185,11 @@ public static class FirewallRule
 
 
 
-
-
-
-
+    /// <summary>
+    /// Obtiene todos los accesos bloqueados
+    /// </summary>
+    /// <param name="id">ID del proyecto</param>
+    /// <param name="token">Token de acceso</param>
     public async static Task<ReadAllResponse<FirewallBlockLogDataModel>> ReadAllBad(int id, string token)
     {
 
