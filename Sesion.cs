@@ -3,9 +3,11 @@ global using System;
 global using System.Net.Http;
 global using System.Text;
 global using System.Threading.Tasks;
-global using LIN.Developer.Types.Enumerations;
+global using LIN.Types.Developer.Enumerations;
+global using LIN.Types.Developer.Models;
 global using LIN.Shared.Tools;
 global using LIN.Types.Responses;
+global using LIN.Modules;
 
 namespace LIN.Access.Developer
 {

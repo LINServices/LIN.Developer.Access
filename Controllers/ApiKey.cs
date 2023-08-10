@@ -5,11 +5,17 @@ public static class ApiKey
 {
 
 
-    public async static Task<CreateResponse> Create(ApiKeyDataModel modelo)
+    /// <summary>
+    /// Crea una api key
+    /// </summary>
+    /// <param name="modelo">Modelo</param>
+    /// <param name="token">Token de acceso</param>
+    public async static Task<CreateResponse> Create(ApiKeyDataModel modelo, string token)
     {
 
         // Variables
         var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("token", token);
 
         string url = ApiServer.PathURL("apikey/create");
         string json = JsonConvert.SerializeObject(modelo);
@@ -40,7 +46,12 @@ public static class ApiKey
 
 
 
-    public async static Task<ReadAllResponse<ApiKeyDataModel>> ReadAll(int id)
+    /// <summary>
+    /// Obtiene las llaves asociadas a un proyecto
+    /// </summary>
+    /// <param name="id">ID del proyecto</param>
+    /// <param name="token">Token de acceso</param>
+    public async static Task<ReadAllResponse<ApiKeyDataModel>> ReadAll(int id, string token)
     {
 
         // Crear HttpClient
@@ -52,6 +63,7 @@ public static class ApiKey
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Add("id", $"{id}");
+        request.Headers.Add("token", token);
 
         try
         {
@@ -80,11 +92,14 @@ public static class ApiKey
 
 
 
-
-
-
-
-    public async static Task<ResponseBase> ChangeState(int id, ApiKeyStatus estado)
+    /// <summary>
+    /// Cambia el estado de una llave
+    /// </summary>
+    /// <param name="id">ID de la llave</param>
+    /// <param name="estado">Nuevo estado</param>
+    /// <param name="token">Token de acceso</param>
+    /// <returns></returns>
+    public async static Task<ResponseBase> ChangeState(int id, ApiKeyStatus estado, string token)
     {
 
         // Crear HttpClient
@@ -98,6 +113,7 @@ public static class ApiKey
         var request = new HttpRequestMessage(HttpMethod.Patch, url);
         request.Headers.Add("key", $"{id}");
         request.Headers.Add("estado", $"{(int)estado}");
+        request.Headers.Add("token", token);
 
         try
         {
@@ -129,6 +145,11 @@ public static class ApiKey
 
 
 
+    /// <summary>
+    /// Generar uso a una llave
+    /// </summary>
+    /// <param name="modelo">Modelo</param>
+    /// <param name="key">LLave</param>
     public async static Task<CreateResponse> GenerateUse(ApiKeyUsesDataModel modelo, string key)
     {
 
@@ -163,7 +184,6 @@ public static class ApiKey
         return new();
 
     }
-
 
 
 }

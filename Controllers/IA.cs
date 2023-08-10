@@ -1,6 +1,4 @@
-﻿using LIN.Developer.Types.Enumerations;
-
-namespace LIN.Access.Developer.Controllers;
+﻿namespace LIN.Access.Developer.Controllers;
 
 
 public class IA

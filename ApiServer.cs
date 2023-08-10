@@ -1,6 +1,4 @@
-﻿global using LIN.Developer.Types.Models;
-
-namespace LIN.Access.Developer;
+﻿namespace LIN.Access.Developer;
 
 public static class ApiServer
 {
@@ -14,10 +12,10 @@ public static class ApiServer
             if (IsSeted)
                 return SetedUrl;
 
-return "http://lindevelopers.somee.com/";
+            return "http://lindevelopers.somee.com/";
             return "https://lindeveloper.azurewebsites.net/";
             return "https://localhost:7020/";
-            
+
 
         }
     }
