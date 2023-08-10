@@ -18,7 +18,7 @@ public static class FirewallRule
 
         client.DefaultRequestHeaders.Add("token", token);
 
-        string url = ApiServer.PathURL("firewallrules/create");
+        string url = ApiServer.PathURL("firewallRules/create");
         string json = JsonConvert.SerializeObject(modelo);
 
         try
@@ -26,7 +26,7 @@ public static class FirewallRule
             // Contenido
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
-            // Envia la solicitud
+            // Envía la solicitud
             HttpResponseMessage response = await client.PostAsync(url, content);
 
             // Lee la respuesta del servidor
@@ -59,7 +59,7 @@ public static class FirewallRule
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("firewallrules/read/all");
+        string url = ApiServer.PathURL("firewallRules/read/all");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -105,7 +105,7 @@ public static class FirewallRule
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("firewallrules/delete");
+        string url = ApiServer.PathURL("firewallRules/delete");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Delete, url);
@@ -151,7 +151,7 @@ public static class FirewallRule
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("firewallrules/delete/bad");
+        string url = ApiServer.PathURL("firewallRules/delete/bad");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Delete, url);
@@ -197,7 +197,7 @@ public static class FirewallRule
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("firewallrules/read/bad");
+        string url = ApiServer.PathURL("firewallRules/read/bad");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
