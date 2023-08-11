@@ -1,13 +1,12 @@
-﻿global using Newtonsoft.Json;
+﻿global using LIN.Modules;
+global using LIN.Types.Developer.Enumerations;
+global using LIN.Types.Developer.Models;
+global using LIN.Types.Responses;
+global using Newtonsoft.Json;
 global using System;
 global using System.Net.Http;
 global using System.Text;
 global using System.Threading.Tasks;
-global using LIN.Types.Developer.Enumerations;
-global using LIN.Types.Developer.Models;
-global using LIN.Shared.Tools;
-global using LIN.Types.Responses;
-global using LIN.Modules;
 
 namespace LIN.Access.Developer;
 
@@ -38,7 +37,14 @@ public sealed class Session
     /// <summary>
     /// Si la sesión es activa
     /// </summary>
-    public static bool IsOpen { get; set; } = false;
+    public static bool IsAccountOpen { get => Instance.Account.ID > 0; }
+
+
+
+    /// <summary>
+    /// Si la sesión es activa
+    /// </summary>
+    public static bool IsDevOpen { get => Instance.Informacion.ID > 0; }
 
 
 
@@ -63,8 +69,6 @@ public sealed class Session
         // Datos de la instancia
         Instance.Informacion = response.Model.Profile;
         Instance.Account = response.Model.Account;
-
-        IsOpen = true;
 
         Instance.Token = response.Token;
         Instance.AccountToken = response.Model.LINAuthToken;
@@ -96,8 +100,6 @@ public sealed class Session
         Instance.Informacion = response.Model.Profile;
         Instance.Account = response.Model.Account;
 
-        IsOpen = true;
-
         Instance.Token = response.Token;
         Instance.AccountToken = response.Model.LINAuthToken;
 
@@ -115,8 +117,8 @@ public sealed class Session
     /// </summary>
     public static void CloseSession()
     {
-        IsOpen = false;
         Instance.Informacion = new();
+        Instance.Account = new();
     }
 
 
