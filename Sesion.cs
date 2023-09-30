@@ -27,7 +27,7 @@ public sealed class Session
     /// <summary>
     /// Información del usuario
     /// </summary>
-    public LIN.Types.Auth.Models.AccountModel Account { get; private set; } = new();
+    public Types.Auth.Models.AccountModel Account { get; private set; } = new();
 
 
     public string AccountToken { get; set; }
@@ -37,14 +37,14 @@ public sealed class Session
     /// <summary>
     /// Si la sesión es activa
     /// </summary>
-    public static bool IsAccountOpen { get => Instance.Account.ID > 0; }
+    public static bool IsAccountOpen => Instance.Account.ID > 0;
 
 
 
     /// <summary>
     /// Si la sesión es activa
     /// </summary>
-    public static bool IsDevOpen { get => Instance.Informacion.ID > 0; }
+    public static bool IsDevOpen => Instance.Informacion.ID > 0;
 
 
 

@@ -10,7 +10,7 @@ public static class FirewallRule
     /// </summary>
     /// <param name="modelo">Modelo de la regla</param>
     /// <param name="token">Token de acceso</param>
-    public async static Task<CreateResponse> Create(FirewallRuleDataModel modelo, string token)
+    public static async Task<CreateResponse> Create(FirewallRuleDataModel modelo, string token)
     {
 
         // Variables
@@ -18,8 +18,8 @@ public static class FirewallRule
 
         client.DefaultRequestHeaders.Add("token", token);
 
-        string url = ApiServer.PathURL("firewallRules/create");
-        string json = JsonConvert.SerializeObject(modelo);
+        var url = ApiServer.PathURL("firewallRules/create");
+        var json = JsonConvert.SerializeObject(modelo);
 
         try
         {
@@ -27,10 +27,10 @@ public static class FirewallRule
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
             // Envía la solicitud
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            var response = await client.PostAsync(url, content);
 
             // Lee la respuesta del servidor
-            string responseContent = await response.Content.ReadAsStringAsync();
+            var responseContent = await response.Content.ReadAsStringAsync();
 
             var obj = JsonConvert.DeserializeObject<CreateResponse>(responseContent);
 
@@ -52,14 +52,14 @@ public static class FirewallRule
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public async static Task<ReadAllResponse<FirewallRuleDataModel>> ReadAllAsync(int id, string token)
+    public static async Task<ReadAllResponse<FirewallRuleDataModel>> ReadAllAsync(int id, string token)
     {
 
         // Crear HttpClient
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("firewallRules/read/all");
+        var url = ApiServer.PathURL("firewallRules/read/all");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -70,10 +70,10 @@ public static class FirewallRule
         {
 
             // Hacer la solicitud GET
-            HttpResponseMessage response = await httpClient.SendAsync(request);
+            var response = await httpClient.SendAsync(request);
 
             // Leer la respuesta como una cadena
-            string responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await response.Content.ReadAsStringAsync();
 
 
             var obj = JsonConvert.DeserializeObject<ReadAllResponse<FirewallRuleDataModel>>(responseBody);
@@ -98,14 +98,14 @@ public static class FirewallRule
     /// </summary>
     /// <param name="id">ID de la regla</param>
     /// <param name="token">Token de acceso</param>
-    public async static Task<ResponseBase> Delete(int id, string token)
+    public static async Task<ResponseBase> Delete(int id, string token)
     {
 
         // Crear HttpClient
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("firewallRules/delete");
+        var url = ApiServer.PathURL("firewallRules/delete");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Delete, url);
@@ -116,10 +116,10 @@ public static class FirewallRule
         {
 
             // Hacer la solicitud GET
-            HttpResponseMessage response = await httpClient.SendAsync(request);
+            var response = await httpClient.SendAsync(request);
 
             // Leer la respuesta como una cadena
-            string responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await response.Content.ReadAsStringAsync();
 
 
             var obj = JsonConvert.DeserializeObject<ResponseBase>(responseBody);
@@ -144,14 +144,14 @@ public static class FirewallRule
     /// </summary>
     /// <param name="id">id del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public async static Task<ResponseBase> DeleteBasAccess(int id, string token)
+    public static async Task<ResponseBase> DeleteBasAccess(int id, string token)
     {
 
         // Crear HttpClient
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("firewallRules/delete/bad");
+        var url = ApiServer.PathURL("firewallRules/delete/bad");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Delete, url);
@@ -162,10 +162,10 @@ public static class FirewallRule
         {
 
             // Hacer la solicitud GET
-            HttpResponseMessage response = await httpClient.SendAsync(request);
+            var response = await httpClient.SendAsync(request);
 
             // Leer la respuesta como una cadena
-            string responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await response.Content.ReadAsStringAsync();
 
 
             var obj = JsonConvert.DeserializeObject<ResponseBase>(responseBody);
@@ -190,14 +190,14 @@ public static class FirewallRule
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public async static Task<ReadAllResponse<FirewallBlockLogDataModel>> ReadAllBad(int id, string token)
+    public static async Task<ReadAllResponse<FirewallBlockLogDataModel>> ReadAllBad(int id, string token)
     {
 
         // Crear HttpClient
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("firewallRules/read/bad");
+        var url = ApiServer.PathURL("firewallRules/read/bad");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -208,10 +208,10 @@ public static class FirewallRule
         {
 
             // Hacer la solicitud GET
-            HttpResponseMessage response = await httpClient.SendAsync(request);
+            var response = await httpClient.SendAsync(request);
 
             // Leer la respuesta como una cadena
-            string responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await response.Content.ReadAsStringAsync();
 
 
             var obj = JsonConvert.DeserializeObject<ReadAllResponse<FirewallBlockLogDataModel>>(responseBody);

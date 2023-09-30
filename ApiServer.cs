@@ -1,5 +1,6 @@
 ﻿namespace LIN.Access.Developer;
 
+
 public static class ApiServer
 {
     private static bool IsSeted = false;

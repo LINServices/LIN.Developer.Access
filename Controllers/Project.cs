@@ -10,7 +10,7 @@ public static class Project
     /// </summary>
     /// <param name="modelo">Modelo del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public async static Task<CreateResponse> Create(ProjectDataModel modelo, string token)
+    public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token)
     {
 
         // Variables
@@ -18,8 +18,8 @@ public static class Project
 
         client.DefaultRequestHeaders.Add("token", token);
 
-        string url = ApiServer.PathURL("project/create");
-        string json = JsonConvert.SerializeObject(modelo);
+        var url = ApiServer.PathURL("project/create");
+        var json = JsonConvert.SerializeObject(modelo);
 
         try
         {
@@ -27,10 +27,10 @@ public static class Project
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
             // Envía la solicitud
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            var response = await client.PostAsync(url, content);
 
             // Lee la respuesta del servidor
-            string responseContent = await response.Content.ReadAsStringAsync();
+            var responseContent = await response.Content.ReadAsStringAsync();
 
             var obj = JsonConvert.DeserializeObject<CreateResponse>(responseContent);
 
@@ -51,14 +51,14 @@ public static class Project
     /// Obtiene los proyectos asociados a un perfil
     /// </summary>
     /// <param name="token">Token de acceso</param>
-    public async static Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token)
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token)
     {
 
         // Crear HttpClient
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("project/read/all");
+        var url = ApiServer.PathURL("project/read/all");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -68,10 +68,10 @@ public static class Project
         {
 
             // Hacer la solicitud GET
-            HttpResponseMessage response = await httpClient.SendAsync(request);
+            var response = await httpClient.SendAsync(request);
 
             // Leer la respuesta como una cadena
-            string responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await response.Content.ReadAsStringAsync();
 
 
             var obj = JsonConvert.DeserializeObject<ReadAllResponse<ProjectDataModel>>(responseBody);
@@ -96,14 +96,14 @@ public static class Project
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public async static Task<ReadOneResponse<ProjectDataModel>> ReadOne(int id, string token)
+    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOne(int id, string token)
     {
 
         // Crear HttpClient
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("project/read");
+        var url = ApiServer.PathURL("project/read");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -114,10 +114,10 @@ public static class Project
         {
 
             // Hacer la solicitud GET
-            HttpResponseMessage response = await httpClient.SendAsync(request);
+            var response = await httpClient.SendAsync(request);
 
             // Leer la respuesta como una cadena
-            string responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await response.Content.ReadAsStringAsync();
 
 
             var obj = JsonConvert.DeserializeObject<ReadOneResponse<ProjectDataModel>>(responseBody);
@@ -142,7 +142,7 @@ public static class Project
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public async static Task<ReadOneResponse<bool>> Delete(int id, string token)
+    public static async Task<ReadOneResponse<bool>> Delete(int id, string token)
     {
 
         Console.WriteLine($"Consulta Update");
@@ -151,7 +151,7 @@ public static class Project
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        string url = ApiServer.PathURL("project/delete");
+        var url = ApiServer.PathURL("project/delete");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Delete, url);
@@ -162,10 +162,10 @@ public static class Project
         {
 
             // Hacer la solicitud GET
-            HttpResponseMessage response = await httpClient.SendAsync(request);
+            var response = await httpClient.SendAsync(request);
 
             // Leer la respuesta como una cadena
-            string responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await response.Content.ReadAsStringAsync();
 
 
             var obj = JsonConvert.DeserializeObject<ReadOneResponse<bool>>(responseBody);

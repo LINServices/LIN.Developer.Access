@@ -1,5 +1,7 @@
 ﻿namespace LIN.Access.Developer.Controllers;
-using LIN.Types.Enumerations;
+
+
+using Types.Enumerations;
 
 public class IA
 {
@@ -10,15 +12,15 @@ public class IA
     /// </summary>
     /// <param name="value">Valor a predecir</param>
     /// <param name="key">Llave</param>
-    public async static Task<ReadOneResponse<Sentiments>> SentimentIA(string value, string key)
+    public static async Task<ReadOneResponse<Sentiments>> SentimentIA(string value, string key)
     {
 
         // Variables
         var client = new HttpClient();
         client.DefaultRequestHeaders.Add("apiKey", key);
 
-        string url = ApiServer.PathURL("IA/predict/sentiment");
-        string json = JsonConvert.SerializeObject(value);
+        var url = ApiServer.PathURL("IA/predict/sentiment");
+        var json = JsonConvert.SerializeObject(value);
 
         try
         {
@@ -26,10 +28,10 @@ public class IA
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
             // Envia la solicitud
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            var response = await client.PostAsync(url, content);
 
             // Lee la respuesta del servidor
-            string responseContent = await response.Content.ReadAsStringAsync();
+            var responseContent = await response.Content.ReadAsStringAsync();
 
             var obj = JsonConvert.DeserializeObject<ReadOneResponse<Sentiments>>(responseContent) ?? new();
 
@@ -51,7 +53,7 @@ public class IA
     /// </summary>
     /// <param name="value">Valor a predecir</param>
     /// <param name="key">Llave</param>
-    public async static Task<ReadOneResponse<Languajes>> LangIA(string value, string key)
+    public static async Task<ReadOneResponse<Languajes>> LangIA(string value, string key)
     {
 
         // Variables
@@ -59,8 +61,8 @@ public class IA
         client.DefaultRequestHeaders.Add("apiKey", key);
 
 
-        string url = ApiServer.PathURL("IA/predict/lang");
-        string json = JsonConvert.SerializeObject(value);
+        var url = ApiServer.PathURL("IA/predict/lang");
+        var json = JsonConvert.SerializeObject(value);
 
         try
         {
@@ -68,10 +70,10 @@ public class IA
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
             // Envia la solicitud
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            var response = await client.PostAsync(url, content);
 
             // Lee la respuesta del servidor
-            string responseContent = await response.Content.ReadAsStringAsync();
+            var responseContent = await response.Content.ReadAsStringAsync();
 
             var obj = JsonConvert.DeserializeObject<ReadOneResponse<Languajes>>(responseContent) ?? new();
 
@@ -90,7 +92,7 @@ public class IA
 
 
 
-    public async static Task<ReadOneResponse<CategorizeModel>> Categorizar(string value, string entry, PayWith payWith)
+    public static async Task<ReadOneResponse<CategorizeModel>> Categorizar(string value, string entry, PayWith payWith)
     {
 
         // Variables
@@ -98,8 +100,8 @@ public class IA
         client.DefaultRequestHeaders.Add("access", entry);
 
 
-        string url = ApiServer.PathURL($"IA/Categorize/predict/{(int)payWith}");
-        string json = JsonConvert.SerializeObject(value);
+        var url = ApiServer.PathURL($"IA/Categorize/predict/{(int)payWith}");
+        var json = JsonConvert.SerializeObject(value);
 
         try
         {
@@ -107,10 +109,10 @@ public class IA
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
             // Envia la solicitud
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            var response = await client.PostAsync(url, content);
 
             // Lee la respuesta del servidor
-            string responseContent = await response.Content.ReadAsStringAsync();
+            var responseContent = await response.Content.ReadAsStringAsync();
 
             var obj = JsonConvert.DeserializeObject<ReadOneResponse<CategorizeModel>>(responseContent) ?? new();
 

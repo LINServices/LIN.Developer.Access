@@ -1,23 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <Configurations>Debug;Release;</Configurations>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Configurations>Debug;Release;</Configurations>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Tipos\LIN.Modules\LIN.Modules.csproj" />
-    <ProjectReference Include="..\..\Tipos\LIN.Types.Auth\LIN.Types.Auth.csproj" />
-    <ProjectReference Include="..\..\Tipos\LIN.Types.Developer\LIN.Types.Developer.csproj" />
-    <ProjectReference Include="..\..\Tipos\LIN.Types\LIN.Types.csproj" />
-  </ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\..\Tipos\LIN.Modules\LIN.Modules.csproj"/>
+        <ProjectReference Include="..\..\Tipos\LIN.Types.Auth\LIN.Types.Auth.csproj"/>
+        <ProjectReference Include="..\..\Tipos\LIN.Types.Developer\LIN.Types.Developer.csproj"/>
+        <ProjectReference Include="..\..\Tipos\LIN.Types\LIN.Types.csproj"/>
+    </ItemGroup>
 
 
 </Project>
