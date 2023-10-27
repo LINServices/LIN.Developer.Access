@@ -51,7 +51,7 @@ public static class Project
     /// Obtiene los proyectos asociados a un perfil
     /// </summary>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token)
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token, string tokenAuth)
     {
 
         // Crear HttpClient
@@ -63,6 +63,7 @@ public static class Project
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Add("token", $"{token}");
+        request.Headers.Add("tokenAuth", $"{tokenAuth}");
 
         try
         {

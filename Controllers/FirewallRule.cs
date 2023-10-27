@@ -10,7 +10,7 @@ public static class FirewallRule
     /// </summary>
     /// <param name="modelo">Modelo de la regla</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(FirewallRuleDataModel modelo, string token)
+    public static async Task<CreateResponse> Create(FirewallRuleModel modelo, string token)
     {
 
         // Variables
@@ -52,7 +52,7 @@ public static class FirewallRule
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<FirewallRuleDataModel>> ReadAllAsync(int id, string token)
+    public static async Task<ReadAllResponse<FirewallRuleModel>> ReadAllAsync(int id, string token)
     {
 
         // Crear HttpClient
@@ -76,7 +76,7 @@ public static class FirewallRule
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadAllResponse<FirewallRuleDataModel>>(responseBody);
+            var obj = JsonConvert.DeserializeObject<ReadAllResponse<FirewallRuleModel>>(responseBody);
 
             return obj ?? new();
 

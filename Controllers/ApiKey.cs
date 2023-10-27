@@ -10,7 +10,7 @@ public static class ApiKey
     /// </summary>
     /// <param name="modelo">Modelo</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(ApiKeyDataModel modelo, string token)
+    public static async Task<CreateResponse> Create(KeyModel modelo, string token)
     {
 
         // Variables
@@ -51,7 +51,7 @@ public static class ApiKey
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<ApiKeyDataModel>> ReadAll(int id, string token)
+    public static async Task<ReadAllResponse<KeyModel>> ReadAll(int id, string token)
     {
 
         // Crear HttpClient
@@ -75,7 +75,7 @@ public static class ApiKey
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadAllResponse<ApiKeyDataModel>>(responseBody);
+            var obj = JsonConvert.DeserializeObject<ReadAllResponse<KeyModel>>(responseBody);
 
             return obj ?? new();
 
@@ -150,7 +150,7 @@ public static class ApiKey
     /// </summary>
     /// <param name="modelo">Modelo</param>
     /// <param name="key">LLave</param>
-    public static async Task<CreateResponse> GenerateUse(ApiKeyUsesDataModel modelo, string key)
+    public static async Task<CreateResponse> GenerateUse(KeyModel modelo, string key)
     {
 
         // Variables

@@ -106,7 +106,7 @@ public static class Profile
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        var url = ApiServer.PathURL("profile/login");
+        var url = ApiServer.PathURL("authentication/login");
 
 
         url = Web.AddParameters(url, new()
@@ -161,7 +161,7 @@ public static class Profile
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        var url = ApiServer.PathURL("profile/login/token");
+        var url = ApiServer.PathURL("authentication/login/token");
 
 
         url = Web.AddParameters(url, new()
