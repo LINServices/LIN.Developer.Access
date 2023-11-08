@@ -6,6 +6,7 @@ global using Newtonsoft.Json;
 global using System;
 global using System.Net.Http;
 global using System.Text;
+global using LIN.Types.Developer.Models.Projects;
 global using System.Threading.Tasks;
 
 namespace LIN.Access.Developer;

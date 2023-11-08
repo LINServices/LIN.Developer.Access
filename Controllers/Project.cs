@@ -1,4 +1,34 @@
-﻿namespace LIN.Access.Developer.Controllers;
+﻿using MongoDB.Bson;
+
+namespace LIN.Access.Developer.Controllers;
+
+
+public class ObjectIdConverter : JsonConverter
+{
+    public override bool CanConvert(Type objectType) { return objectType == typeof(ObjectId); }
+
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    {
+        if (reader.TokenType != JsonToken.String)
+            throw new Exception($"Unexpected token parsing ObjectId. Expected String, got {reader.TokenType}.");
+
+        var value = (string)reader.Value;
+        return string.IsNullOrEmpty(value) ? ObjectId.Empty : new ObjectId(value);
+    }
+
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+        if (value is ObjectId)
+        {
+            var objectId = (ObjectId)value;
+            writer.WriteValue(objectId != ObjectId.Empty ? objectId.ToString() : string.Empty);
+        }
+        else
+        {
+            throw new Exception("Expected ObjectId value.");
+        }
+    }
+}
 
 
 public static class Project
@@ -10,7 +40,7 @@ public static class Project
     /// </summary>
     /// <param name="modelo">Modelo del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token)
+    public static async Task<CreateResponse> Create(ResourceModel modelo, string token)
     {
 
         // Variables
@@ -51,14 +81,14 @@ public static class Project
     /// Obtiene los proyectos asociados a un perfil
     /// </summary>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token, string tokenAuth)
+    public static async Task<ReadAllResponse<ResourceModel>> ReadAllAsync(string token, string tokenAuth)
     {
 
         // Crear HttpClient
         using var httpClient = new HttpClient();
 
         // ApiServer de la solicitud GET
-        var url = ApiServer.PathURL("project/read/all");
+        var url = ApiServer.PathURL("resources/read/all");
 
         // Crear HttpRequestMessage y agregar el encabezado
         var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -68,6 +98,12 @@ public static class Project
         try
         {
 
+            var _serializerSettings = new JsonSerializerSettings()
+            {
+                Converters = new List<JsonConverter> { new ObjectIdConverter() }
+            };
+
+
             // Hacer la solicitud GET
             var response = await httpClient.SendAsync(request);
 
@@ -75,7 +111,7 @@ public static class Project
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadAllResponse<ProjectDataModel>>(responseBody);
+            var obj = JsonConvert.DeserializeObject<ReadAllResponse<ResourceModel>>(responseBody, _serializerSettings);
 
             return obj ?? new();
 
@@ -97,7 +133,7 @@ public static class Project
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOne(int id, string token)
+    public static async Task<ReadOneResponse<ResourceModel>> ReadOne(int id, string token)
     {
 
         // Crear HttpClient
@@ -121,7 +157,12 @@ public static class Project
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<ProjectDataModel>>(responseBody);
+            var _serializerSettings = new JsonSerializerSettings()
+            {
+                Converters = new List<JsonConverter> { new ObjectIdConverter() }
+            };
+
+            var obj = JsonConvert.DeserializeObject<ReadOneResponse<ResourceModel>>(responseBody, _serializerSettings);
 
             return obj ?? new();
 

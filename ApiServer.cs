@@ -13,11 +13,9 @@ public static class ApiServer
             if (IsSeted)
                 return SetedUrl;
 
-            return "http://lindevelopers.somee.com/";
+    return "http://lindevelopers.somee.com/";
+            return "http://localhost:5089/";
             return "https://lindeveloper.azurewebsites.net/";
-            return "https://localhost:7020/";
-
-
         }
     }
 
