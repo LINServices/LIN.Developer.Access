@@ -2,12 +2,11 @@
 global using LIN.Types.Developer.Enumerations;
 global using LIN.Types.Developer.Models;
 global using LIN.Types.Responses;
-global using Newtonsoft.Json;
-global using System;
 global using System.Net.Http;
 global using System.Text;
 global using LIN.Types.Developer.Models.Projects;
 global using System.Threading.Tasks;
+global using System.Text.Json;
 
 namespace LIN.Access.Developer;
 

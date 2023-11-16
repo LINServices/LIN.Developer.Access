@@ -20,7 +20,7 @@ public class IA
         client.DefaultRequestHeaders.Add("apiKey", key);
 
         var url = ApiServer.PathURL("IA/predict/sentiment");
-        var json = JsonConvert.SerializeObject(value);
+        var json = JsonSerializer.Serialize(value);
 
         try
         {
@@ -33,7 +33,7 @@ public class IA
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<Sentiments>>(responseContent) ?? new();
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<Sentiments>>(responseContent) ?? new();
 
             return obj ?? new();
 
@@ -62,7 +62,7 @@ public class IA
 
 
         var url = ApiServer.PathURL("IA/predict/lang");
-        var json = JsonConvert.SerializeObject(value);
+        var json = JsonSerializer.Serialize(value);
 
         try
         {
@@ -75,7 +75,7 @@ public class IA
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<Languajes>>(responseContent) ?? new();
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<Languajes>>(responseContent) ?? new();
 
             return obj ?? new();
 
@@ -101,7 +101,7 @@ public class IA
 
 
         var url = ApiServer.PathURL($"IA/Categorize/predict/{(int)payWith}");
-        var json = JsonConvert.SerializeObject(value);
+        var json = JsonSerializer.Serialize(value);
 
         try
         {
@@ -114,7 +114,7 @@ public class IA
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<CategorizeModel>>(responseContent) ?? new();
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<CategorizeModel>>(responseContent) ?? new();
 
             return obj ?? new();
 

@@ -19,7 +19,7 @@ public static class FirewallRule
         client.DefaultRequestHeaders.Add("token", token);
 
         var url = ApiServer.PathURL("firewallRules/create");
-        var json = JsonConvert.SerializeObject(modelo);
+        var json = JsonSerializer.Serialize(modelo);
 
         try
         {
@@ -32,7 +32,7 @@ public static class FirewallRule
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<CreateResponse>(responseContent);
+            var obj = JsonSerializer.Deserialize<CreateResponse>(responseContent);
 
             return obj ?? new();
 
@@ -76,7 +76,7 @@ public static class FirewallRule
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadAllResponse<FirewallRuleModel>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadAllResponse<FirewallRuleModel>>(responseBody);
 
             return obj ?? new();
 
@@ -122,7 +122,7 @@ public static class FirewallRule
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ResponseBase>(responseBody);
+            var obj = JsonSerializer.Deserialize<ResponseBase>(responseBody);
 
             return obj ?? new();
 
@@ -168,7 +168,7 @@ public static class FirewallRule
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ResponseBase>(responseBody);
+            var obj = JsonSerializer.Deserialize<ResponseBase>(responseBody);
 
             return obj ?? new();
 
@@ -214,7 +214,7 @@ public static class FirewallRule
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadAllResponse<FirewallBlockLogDataModel>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadAllResponse<FirewallBlockLogDataModel>>(responseBody);
 
             return obj ?? new();
 

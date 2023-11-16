@@ -18,7 +18,7 @@ public static class ApiKey
         client.DefaultRequestHeaders.Add("token", token);
 
         var url = ApiServer.PathURL("apikey/create");
-        var json = JsonConvert.SerializeObject(modelo);
+        var json = JsonSerializer.Serialize(modelo);
 
         try
         {
@@ -31,7 +31,7 @@ public static class ApiKey
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<CreateResponse>(responseContent);
+            var obj = JsonSerializer.Deserialize<CreateResponse>(responseContent);
 
             return obj ?? new();
 
@@ -75,7 +75,7 @@ public static class ApiKey
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadAllResponse<KeyModel>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadAllResponse<KeyModel>>(responseBody);
 
             return obj ?? new();
 
@@ -124,7 +124,7 @@ public static class ApiKey
             // Leer la respuesta como una cadena
             var responseBody = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ResponseBase>(responseBody);
+            var obj = JsonSerializer.Deserialize<ResponseBase>(responseBody);
 
             return obj ?? new();
 
@@ -157,7 +157,7 @@ public static class ApiKey
         var client = new HttpClient();
 
         var url = ApiServer.PathURL("key/uses/create");
-        var json = JsonConvert.SerializeObject(modelo);
+        var json = JsonSerializer.Serialize(modelo);
         client.DefaultRequestHeaders.Add("apiKey", key);
 
 
@@ -172,7 +172,7 @@ public static class ApiKey
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<CreateResponse>(responseContent);
+            var obj = JsonSerializer.Deserialize<CreateResponse>(responseContent);
 
             return obj ?? new();
 

@@ -18,7 +18,7 @@ public static class Profile
         var client = new HttpClient();
 
         var url = ApiServer.PathURL("profile/create");
-        var json = JsonConvert.SerializeObject(modelo);
+        var json = JsonSerializer.Serialize(modelo);
 
         try
         {
@@ -31,7 +31,7 @@ public static class Profile
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<CreateResponse>(responseContent);
+            var obj = JsonSerializer.Deserialize<CreateResponse>(responseContent);
 
             return obj ?? new();
 
@@ -72,7 +72,7 @@ public static class Profile
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ResponseBase>(responseContent);
+            var obj = JsonSerializer.Deserialize<ResponseBase>(responseContent);
 
             return obj ?? new();
 
@@ -129,7 +129,7 @@ public static class Profile
             // Leer la respuesta como una cadena
             var responseBody = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<Types.Auth.Abstracts.AuthModel<ProfileDataModel>>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<Types.Auth.Abstracts.AuthModel<ProfileDataModel>>>(responseBody);
 
             return obj ?? new();
 
@@ -181,7 +181,7 @@ public static class Profile
             // Leer la respuesta como una cadena
             var responseBody = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<Types.Auth.Abstracts.AuthModel<ProfileDataModel>>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<Types.Auth.Abstracts.AuthModel<ProfileDataModel>>>(responseBody);
 
             return obj ?? new();
 
@@ -244,7 +244,7 @@ public static class Profile
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ResponseBase>(responseContent);
+            var obj = JsonSerializer.Deserialize<ResponseBase>(responseContent);
 
             return obj ?? new();
 
@@ -296,7 +296,7 @@ public static class Profile
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<ProfileDataModel>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<ProfileDataModel>>(responseBody);
 
             return obj ?? new();
 
@@ -336,7 +336,7 @@ public static class Profile
             // Leer la respuesta como una cadena
             var responseBody = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<bool>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<bool>>(responseBody);
 
             return obj ?? new();
 
@@ -380,7 +380,7 @@ public static class Profile
             // Leer la respuesta como una cadena
             var responseBody = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<ProfileDataModel>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<ProfileDataModel>>(responseBody);
 
             return obj ?? new();
 
@@ -427,7 +427,7 @@ public static class Profile
             // Leer la respuesta como una cadena
             var responseBody = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<ResponseBase>(responseBody);
+            var obj = JsonSerializer.Deserialize<ResponseBase>(responseBody);
 
             return obj ?? new();
 
@@ -474,7 +474,7 @@ public static class Profile
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadAllResponse<TransactionDataModel>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadAllResponse<TransactionDataModel>>(responseBody);
 
             return obj ?? new();
 

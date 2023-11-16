@@ -49,7 +49,7 @@ public static class Project
         client.DefaultRequestHeaders.Add("token", token);
 
         var url = ApiServer.PathURL("project/create");
-        var json = JsonConvert.SerializeObject(modelo);
+        var json = JsonSerializer.Serialize(modelo);
 
         try
         {
@@ -62,7 +62,7 @@ public static class Project
             // Lee la respuesta del servidor
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<CreateResponse>(responseContent);
+            var obj = JsonSerializer.Deserialize<CreateResponse>(responseContent);
 
             return obj ?? new();
 
@@ -111,7 +111,7 @@ public static class Project
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadAllResponse<ResourceModel>>(responseBody, _serializerSettings);
+            var obj = JsonSerializer.Deserialize<ReadAllResponse<ResourceModel>>(responseBody, _serializerSettings);
 
             return obj ?? new();
 
@@ -162,7 +162,7 @@ public static class Project
                 Converters = new List<JsonConverter> { new ObjectIdConverter() }
             };
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<ResourceModel>>(responseBody, _serializerSettings);
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<ResourceModel>>(responseBody, _serializerSettings);
 
             return obj ?? new();
 
@@ -210,7 +210,7 @@ public static class Project
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonConvert.DeserializeObject<ReadOneResponse<bool>>(responseBody);
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<bool>>(responseBody);
 
             return obj ?? new();
 

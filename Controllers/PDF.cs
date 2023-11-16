@@ -14,13 +14,13 @@ public class PDF
         try
         {
             HttpClient client = new();
-            var json = JsonConvert.SerializeObject(html);
+            var json = JsonSerializer.Serialize(html);
 
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
             var response = await (await client.PostAsync("https://linpdf.azurewebsites.net/convert", content)).Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<PDFResponse>(response) ?? new();
+            var obj = JsonSerializer.Deserialize<PDFResponse>(response) ?? new();
 
 
 
