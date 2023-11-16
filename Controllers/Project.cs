@@ -3,34 +3,6 @@
 namespace LIN.Access.Developer.Controllers;
 
 
-public class ObjectIdConverter : JsonConverter
-{
-    public override bool CanConvert(Type objectType) { return objectType == typeof(ObjectId); }
-
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-    {
-        if (reader.TokenType != JsonToken.String)
-            throw new Exception($"Unexpected token parsing ObjectId. Expected String, got {reader.TokenType}.");
-
-        var value = (string)reader.Value;
-        return string.IsNullOrEmpty(value) ? ObjectId.Empty : new ObjectId(value);
-    }
-
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-    {
-        if (value is ObjectId)
-        {
-            var objectId = (ObjectId)value;
-            writer.WriteValue(objectId != ObjectId.Empty ? objectId.ToString() : string.Empty);
-        }
-        else
-        {
-            throw new Exception("Expected ObjectId value.");
-        }
-    }
-}
-
-
 public static class Project
 {
 
@@ -98,12 +70,6 @@ public static class Project
         try
         {
 
-            var _serializerSettings = new JsonSerializerSettings()
-            {
-                Converters = new List<JsonConverter> { new ObjectIdConverter() }
-            };
-
-
             // Hacer la solicitud GET
             var response = await httpClient.SendAsync(request);
 
@@ -111,7 +77,7 @@ public static class Project
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var obj = JsonSerializer.Deserialize<ReadAllResponse<ResourceModel>>(responseBody, _serializerSettings);
+            var obj = JsonSerializer.Deserialize<ReadAllResponse<ResourceModel>>(responseBody);
 
             return obj ?? new();
 
@@ -157,12 +123,7 @@ public static class Project
             var responseBody = await response.Content.ReadAsStringAsync();
 
 
-            var _serializerSettings = new JsonSerializerSettings()
-            {
-                Converters = new List<JsonConverter> { new ObjectIdConverter() }
-            };
-
-            var obj = JsonSerializer.Deserialize<ReadOneResponse<ResourceModel>>(responseBody, _serializerSettings);
+            var obj = JsonSerializer.Deserialize<ReadOneResponse<ResourceModel>>(responseBody);
 
             return obj ?? new();
 
