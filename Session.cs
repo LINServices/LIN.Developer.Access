@@ -1,12 +1,15 @@
-﻿global using LIN.Modules;
+﻿
 global using LIN.Types.Developer.Enumerations;
 global using LIN.Types.Developer.Models;
 global using LIN.Types.Responses;
+global using System.Text.Json;
+global using System;
 global using System.Net.Http;
 global using System.Text;
-global using LIN.Types.Developer.Models.Projects;
 global using System.Threading.Tasks;
-global using System.Text.Json;
+global using Global.Utilities.Network;
+global using  Global.Http.Services;
+
 
 namespace LIN.Access.Developer;
 
@@ -59,7 +62,7 @@ public sealed class Session
         CloseSession();
 
         // Validación de user
-        var response = await Controllers.Profile.Login(user, password);
+        var response = await Controllers.Authentication.Login(user, password);
 
 
         if (response.Response != Responses.Success)
@@ -89,7 +92,7 @@ public sealed class Session
         CloseSession();
 
         // Validación de user
-        var response = await Controllers.Profile.Login(token);
+        var response = await Controllers.Authentication.Login(token);
 
 
         if (response.Response != Responses.Success)

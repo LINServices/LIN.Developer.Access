@@ -1,6 +1,4 @@
 ﻿namespace LIN.Access.Developer.Controllers;
-
-
 using Types.Enumerations;
 
 public class IA
@@ -15,34 +13,17 @@ public class IA
     public static async Task<ReadOneResponse<Sentiments>> SentimentIA(string value, string key)
     {
 
-        // Variables
-        var client = new HttpClient();
-        client.DefaultRequestHeaders.Add("apiKey", key);
+        // Cliente HTTP.
+        Client client = Service.GetClient("IA/predict/sentiment");
 
-        var url = ApiServer.PathURL("IA/predict/sentiment");
-        var json = JsonSerializer.Serialize(value);
+        // Headers.
+        client.AddHeader("key", key);
 
-        try
-        {
-            // Contenido
-            StringContent content = new(json, Encoding.UTF8, "application/json");
+        // Resultado.
+        var Content = await client.Post<ReadOneResponse<Sentiments>>(value);
 
-            // Envia la solicitud
-            var response = await client.PostAsync(url, content);
-
-            // Lee la respuesta del servidor
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            var obj = JsonSerializer.Deserialize<ReadOneResponse<Sentiments>>(responseContent) ?? new();
-
-            return obj ?? new();
-
-        }
-        catch
-        {
-        }
-
-        return new();
+        // Retornar.
+        return Content;
 
     }
 
@@ -55,77 +36,21 @@ public class IA
     /// <param name="key">Llave</param>
     public static async Task<ReadOneResponse<Languajes>> LangIA(string value, string key)
     {
+        // Cliente HTTP.
+        Client client = Service.GetClient("IA/predict/lang");
 
-        // Variables
-        var client = new HttpClient();
-        client.DefaultRequestHeaders.Add("apiKey", key);
+        // Headers.
+        client.AddHeader("key", key);
 
+        // Resultado.
+        var Content = await client.Post<ReadOneResponse<Languajes>>(value);
 
-        var url = ApiServer.PathURL("IA/predict/lang");
-        var json = JsonSerializer.Serialize(value);
-
-        try
-        {
-            // Contenido
-            StringContent content = new(json, Encoding.UTF8, "application/json");
-
-            // Envia la solicitud
-            var response = await client.PostAsync(url, content);
-
-            // Lee la respuesta del servidor
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            var obj = JsonSerializer.Deserialize<ReadOneResponse<Languajes>>(responseContent) ?? new();
-
-            return obj ?? new();
-
-        }
-        catch
-        {
-        }
-
-        return new();
+        // Retornar.
+        return Content;
 
     }
 
 
-
-
-
-    public static async Task<ReadOneResponse<CategorizeModel>> Categorizar(string value, string entry, PayWith payWith)
-    {
-
-        // Variables
-        var client = new HttpClient();
-        client.DefaultRequestHeaders.Add("access", entry);
-
-
-        var url = ApiServer.PathURL($"IA/Categorize/predict/{(int)payWith}");
-        var json = JsonSerializer.Serialize(value);
-
-        try
-        {
-            // Contenido
-            StringContent content = new(json, Encoding.UTF8, "application/json");
-
-            // Envia la solicitud
-            var response = await client.PostAsync(url, content);
-
-            // Lee la respuesta del servidor
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            var obj = JsonSerializer.Deserialize<ReadOneResponse<CategorizeModel>>(responseContent) ?? new();
-
-            return obj ?? new();
-
-        }
-        catch
-        {
-        }
-
-        return new();
-
-    }
 
 
 }

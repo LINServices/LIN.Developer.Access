@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-
-namespace LIN.Access.Developer.Controllers;
+﻿namespace LIN.Access.Developer.Controllers;
 
 
 public static class Project
@@ -12,38 +10,20 @@ public static class Project
     /// </summary>
     /// <param name="modelo">Modelo del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(ResourceModel modelo, string token)
+    public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token)
     {
 
-        // Variables
-        var client = new HttpClient();
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources");
 
-        client.DefaultRequestHeaders.Add("token", token);
+        // Headers.
+        client.AddHeader("token", token);
 
-        var url = ApiServer.PathURL("project/create");
-        var json = JsonSerializer.Serialize(modelo);
+        // Resultado.
+        var Content = await client.Post<CreateResponse>(modelo);
 
-        try
-        {
-            // Contenido
-            StringContent content = new(json, Encoding.UTF8, "application/json");
-
-            // Envía la solicitud
-            var response = await client.PostAsync(url, content);
-
-            // Lee la respuesta del servidor
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            var obj = JsonSerializer.Deserialize<CreateResponse>(responseContent);
-
-            return obj ?? new();
-
-        }
-        catch
-        {
-        }
-
-        return new();
+        // Retornar.
+        return Content;
 
     }
 
@@ -53,43 +33,21 @@ public static class Project
     /// Obtiene los proyectos asociados a un perfil
     /// </summary>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<ResourceModel>> ReadAllAsync(string token, string tokenAuth)
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token)
     {
 
-        // Crear HttpClient
-        using var httpClient = new HttpClient();
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/all");
 
-        // ApiServer de la solicitud GET
-        var url = ApiServer.PathURL("resources/read/all");
+        // Headers.
+        client.AddHeader("token", token);
 
-        // Crear HttpRequestMessage y agregar el encabezado
-        var request = new HttpRequestMessage(HttpMethod.Get, url);
-        request.Headers.Add("token", $"{token}");
-        request.Headers.Add("tokenAuth", $"{tokenAuth}");
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
 
-        try
-        {
+        // Retornar.
+        return Content;
 
-            // Hacer la solicitud GET
-            var response = await httpClient.SendAsync(request);
-
-            // Leer la respuesta como una cadena
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-
-            var obj = JsonSerializer.Deserialize<ReadAllResponse<ResourceModel>>(responseBody);
-
-            return obj ?? new();
-
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Error al hacer la solicitud GET: {e.Message}");
-        }
-
-
-        return new();
     }
 
 
@@ -99,43 +57,24 @@ public static class Project
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadOneResponse<ResourceModel>> ReadOne(int id, string token)
+    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOne(int id, string token)
     {
 
-        // Crear HttpClient
-        using var httpClient = new HttpClient();
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources");
 
-        // ApiServer de la solicitud GET
-        var url = ApiServer.PathURL("project/read");
+        // Headers.
+        client.AddHeader("token", token);
 
-        // Crear HttpRequestMessage y agregar el encabezado
-        var request = new HttpRequestMessage(HttpMethod.Get, url);
-        request.Headers.Add("id", $"{id}");
-        request.Headers.Add("token", $"{token}");
+        // Parámetros.
+        client.AddParameter("id", id);
 
-        try
-        {
+        // Resultado.
+        var Content = await client.Get<ReadOneResponse<ProjectDataModel>>();
 
-            // Hacer la solicitud GET
-            var response = await httpClient.SendAsync(request);
+        // Retornar.
+        return Content;
 
-            // Leer la respuesta como una cadena
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-
-            var obj = JsonSerializer.Deserialize<ReadOneResponse<ResourceModel>>(responseBody);
-
-            return obj ?? new();
-
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Error al hacer la solicitud GET: {e.Message}");
-        }
-
-
-        return new();
     }
 
 
@@ -145,45 +84,24 @@ public static class Project
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadOneResponse<bool>> Delete(int id, string token)
+    public static async Task<ResponseBase> Delete(int id, string token)
     {
 
-        Console.WriteLine($"Consulta Update");
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources");
 
-        // Crear HttpClient
-        using var httpClient = new HttpClient();
+        // Headers.
+        client.AddHeader("token", token);
 
-        // ApiServer de la solicitud GET
-        var url = ApiServer.PathURL("project/delete");
+        // Parámetros.
+        client.AddParameter("id", id);
 
-        // Crear HttpRequestMessage y agregar el encabezado
-        var request = new HttpRequestMessage(HttpMethod.Delete, url);
-        request.Headers.Add("id", $"{id}");
-        request.Headers.Add("token", $"{token}");
+        // Resultado.
+        var Content = await client.Delete<ResponseBase>();
 
-        try
-        {
+        // Retornar.
+        return Content;
 
-            // Hacer la solicitud GET
-            var response = await httpClient.SendAsync(request);
-
-            // Leer la respuesta como una cadena
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-
-            var obj = JsonSerializer.Deserialize<ReadOneResponse<bool>>(responseBody);
-
-            return obj ?? new();
-
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Error al hacer la solicitud GET: {e.Message}");
-        }
-
-
-        return new();
     }
 
 

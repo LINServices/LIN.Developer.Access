@@ -8,7 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Tipos\LIN.Modules\LIN.Modules.csproj" />
+      <PackageReference Include="Global.Http" Version="1.3.0" />
+      <PackageReference Include="Global.Utilities" Version="1.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\..\Tipos\LIN.Types.Cloud.Identity\LIN.Types.Cloud.Identity.csproj" />
         <ProjectReference Include="..\..\Tipos\LIN.Types.Developer\LIN.Types.Developer.csproj" />
         <ProjectReference Include="..\..\Tipos\LIN.Types\LIN.Types.csproj" />

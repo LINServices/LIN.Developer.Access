@@ -1,20 +1,20 @@
 ﻿namespace LIN.Access.Developer.Controllers;
 
 
-public static class FirewallRule
+public static class Keys
 {
 
 
     /// <summary>
-    /// Crea una regla de firewall
+    /// Crea una api key
     /// </summary>
-    /// <param name="modelo">Modelo de la regla</param>
+    /// <param name="modelo">Modelo</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(FirewallRuleModel modelo, string token)
+    public static async Task<CreateResponse> Create(KeyModel modelo, string token)
     {
 
         // Cliente HTTP.
-        Client client = Service.GetClient("firewall");
+        Client client = Service.GetClient("keys");
 
         // Headers.
         client.AddHeader("token", token);
@@ -30,15 +30,15 @@ public static class FirewallRule
 
 
     /// <summary>
-    /// Obtiene las reglas de firewall
+    /// Obtiene las llaves asociadas a un proyecto
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<FirewallRuleModel>> ReadAllAsync(int id, string token)
+    public static async Task<ReadAllResponse<KeyModel>> ReadAll(int id, string token)
     {
 
         // Cliente HTTP.
-        Client client = Service.GetClient("firewall");
+        Client client = Service.GetClient("keys/all");
 
         // Headers.
         client.AddHeader("token", token);
@@ -47,7 +47,7 @@ public static class FirewallRule
         client.AddParameter("id", id);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<FirewallRuleModel>>();
+        var Content = await client.Get<ReadAllResponse<KeyModel>>();
 
         // Retornar.
         return Content;
@@ -57,29 +57,33 @@ public static class FirewallRule
 
 
     /// <summary>
-    /// Elimina una regla de acceso
+    /// Cambia el estado de una llave
     /// </summary>
-    /// <param name="id">ID de la regla</param>
+    /// <param name="id">ID de la llave</param>
+    /// <param name="estado">Nuevo estado</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ResponseBase> Delete(int id, string token)
+    /// <returns></returns>
+    public static async Task<ResponseBase> ChangeState(int id, ApiKeyStatus estado, string token)
     {
 
         // Cliente HTTP.
-        Client client = Service.GetClient("firewall");
+        Client client = Service.GetClient("keys");
 
         // Headers.
         client.AddHeader("token", token);
 
         // Parámetros.
         client.AddParameter("id", id);
+        client.AddParameter("estado", (int)estado);
 
         // Resultado.
-        var Content = await client.Delete<ResponseBase>();
+        var Content = await client.Patch<ResponseBase>();
 
         // Retornar.
         return Content;
 
     }
+
 
 
 }
