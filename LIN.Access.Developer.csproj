@@ -1,23 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
-		<LangVersion>12</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Global.Http" Version="2.0.0" />
-      <PackageReference Include="Global.Utilities" Version="1.0.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\Tipos\LIN.Types.Cloud.Identity\LIN.Types.Cloud.Identity.csproj" />
-        <ProjectReference Include="..\..\Tipos\LIN.Types.Developer\LIN.Types.Developer.csproj" />
-        <ProjectReference Include="..\..\Tipos\LIN.Types\LIN.Types.csproj" />
-    </ItemGroup>
-
-
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Global.Http" Version="2.0.0" />
+    <PackageReference Include="Global.Utilities" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tipos\LIN.Types.Cloud.Identity\LIN.Types.Cloud.Identity.csproj" />
+    <ProjectReference Include="..\..\Tipos\LIN.Types.Developer\LIN.Types.Developer.csproj" />
+    <ProjectReference Include="..\..\Tipos\LIN.Types\LIN.Types.csproj" />
+  </ItemGroup>
 </Project>
