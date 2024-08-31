@@ -1,14 +1,12 @@
 ﻿
+global using Global.Http.Services;
 global using LIN.Types.Developer.Enumerations;
 global using LIN.Types.Developer.Models;
 global using LIN.Types.Responses;
-global using System.Text.Json;
-global using System;
 global using System.Net.Http;
 global using System.Text;
+global using System.Text.Json;
 global using System.Threading.Tasks;
-global using Global.Utilities.Network;
-global using  Global.Http.Services;
 
 
 namespace LIN.Access.Developer;
@@ -132,7 +130,7 @@ public sealed class Session
     //==================== Singleton ====================//
 
 
-    private readonly static Session _instance = new();
+    private static readonly Session _instance = new();
 
     private Session()
     {
