@@ -9,11 +9,13 @@ public static class Profile
     /// Crear perfil.
     /// </summary>
     /// <param name="modelo">Modelo.</param>
-    public static async Task<CreateResponse> Create(ProfileDataModel modelo)
+    public static async Task<CreateResponse> Create(ProfileDataModel modelo, string token)
     {
 
         // Cliente HTTP.
         Client client = Service.GetClient("profiles");
+
+        client.AddHeader("token", token);
 
         // Resultado.
         var Content = await client.Post<CreateResponse>(modelo);

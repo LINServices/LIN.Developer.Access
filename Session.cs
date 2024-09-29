@@ -22,7 +22,7 @@ public sealed class Session
     /// <summary>
     /// Información del usuario
     /// </summary>
-    public ProfileDataModel Informacion { get; private set; } = new();
+    public ProfileDataModel? Informacion { get; private set; } = new();
 
 
     /// <summary>
@@ -45,7 +45,7 @@ public sealed class Session
     /// <summary>
     /// Si la sesión es activa
     /// </summary>
-    public static bool IsDevOpen => Instance.Informacion.ID > 0;
+    public static bool IsDevOpen => Instance.Informacion?.ID > 0;
 
 
 
