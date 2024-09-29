@@ -53,7 +53,7 @@ public static class Profile
     /// <summary>
     /// Encontrar un perfil.
     /// </summary>
-    /// <param name="id">Id del perfil.</param>
+    /// <param name="id">Id de la cuenta.</param>
     public static async Task<ReadOneResponse<ProfileDataModel>> Find(int id)
     {
 
