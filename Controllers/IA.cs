@@ -34,7 +34,7 @@ public class IA
     /// </summary>
     /// <param name="value">Valor a predecir</param>
     /// <param name="key">Llave</param>
-    public static async Task<ReadOneResponse<Languajes>> LangIA(string value, string key)
+    public static async Task<ReadOneResponse<Languages>> LangIA(string value, string key)
     {
         // Cliente HTTP.
         Client client = Service.GetClient("IA/predict/lang");
@@ -43,7 +43,7 @@ public class IA
         client.AddHeader("key", key);
 
         // Resultado.
-        var Content = await client.Post<ReadOneResponse<Languajes>>(value);
+        var Content = await client.Post<ReadOneResponse<Languages>>(value);
 
         // Retornar.
         return Content;
