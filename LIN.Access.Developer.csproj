@@ -7,13 +7,13 @@
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <Title>$(AssemblyName)</Title>
 	  <Authors>LIN Platform</Authors>
-	  <Version>1.1</Version>
+	  <Version>1.2</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Global.Http" Version="2.4.0" />
+    <PackageReference Include="Global.Http" Version="2.5.0" />
     <PackageReference Include="Global.Utilities" Version="1.0.0" />
-    <PackageReference Include="LIN.Types.Cloud.Identity" Version="1.1.0" />
-    <PackageReference Include="LIN.Types.Developer" Version="1.2.0" />
+    <PackageReference Include="LIN.Types.Cloud.Identity" Version="1.5.3" />
+    <PackageReference Include="LIN.Types.Developer" Version="1.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>

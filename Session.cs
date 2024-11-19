@@ -45,7 +45,7 @@ public sealed class Session
     /// <summary>
     /// Si la sesión es activa
     /// </summary>
-    public static bool IsDevOpen => Instance.Informacion?.ID > 0;
+    public static bool IsDevOpen => Instance.Informacion?.Id > 0;
 
 
 
