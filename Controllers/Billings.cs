@@ -5,7 +5,7 @@ public class Billings
 {
 
 
-    public static async Task<CreateResponse> Create(string key, decimal amount)
+    public static async Task<ReadOneResponse<TransactionResultModel>> Create(string key, decimal amount)
     {
 
 
@@ -19,7 +19,7 @@ public class Billings
         client.AddParameter("amount", amount.ToString());
 
         // Resultado.
-        var Content = await client.Post<CreateResponse>();
+        var Content = await client.Post<ReadOneResponse<TransactionResultModel>>();
 
         // Retornar.
         return Content;

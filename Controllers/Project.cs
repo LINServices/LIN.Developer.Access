@@ -10,7 +10,7 @@ public static class Project
     /// </summary>
     /// <param name="modelo">Modelo del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token)
+    public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token, Dictionary<string, string> adicional)
     {
 
         // Cliente HTTP.
@@ -19,6 +19,10 @@ public static class Project
         // Headers.
         client.AddHeader("token", token);
 
+        // Parámetros.
+        foreach (var item in adicional)
+            client.AddParameter(item.Key, item.Value);
+        
         // Resultado.
         var Content = await client.Post<CreateResponse>(modelo);
 
@@ -42,8 +46,15 @@ public static class Project
         // Headers.
         client.AddHeader("token", token);
 
+
+        Dictionary<string, Type> types = new()
+        {
+            {"DEFAULT", typeof(ProjectDataModel) },
+            {"postgre.db", typeof(LIN.Types.Developer.Projects.PostgreSQLProject) },
+        };
+
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>, ProjectDataModel>(types, "Type");
 
         // Retornar.
         return Content;
@@ -69,8 +80,14 @@ public static class Project
         // Parámetros.
         client.AddParameter("id", id);
 
+        Dictionary<string, Type> types = new()
+        {
+            {"DEFAULT", typeof(ProjectDataModel) },
+            {"postgre.db", typeof(LIN.Types.Developer.Projects.PostgreSQLProject) },
+        };
+
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<ProjectDataModel>>();
+        var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type");
 
         // Retornar.
         return Content;
