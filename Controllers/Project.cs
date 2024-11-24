@@ -46,15 +46,8 @@ public static class Project
         // Headers.
         client.AddHeader("token", token);
 
-
-        Dictionary<string, Type> types = new()
-        {
-            {"DEFAULT", typeof(ProjectDataModel) },
-            {"postgre.db", typeof(LIN.Types.Developer.Projects.PostgreSQLProject) },
-        };
-
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>, ProjectDataModel>(types, "Type");
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
 
         // Retornar.
         return Content;
@@ -84,6 +77,7 @@ public static class Project
         {
             {"DEFAULT", typeof(ProjectDataModel) },
             {"postgre.db", typeof(LIN.Types.Developer.Projects.PostgreSQLProject) },
+            {"bucket", typeof(LIN.Types.Developer.Projects.BucketProject) },
         };
 
         // Resultado.
