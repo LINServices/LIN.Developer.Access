@@ -7,7 +7,7 @@
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <Title>$(AssemblyName)</Title>
 	  <Authors>LIN Platform</Authors>
-	  <Version>1.2.8</Version>
+	  <Version>1.3</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Global.Http" Version="3.1.0" />
