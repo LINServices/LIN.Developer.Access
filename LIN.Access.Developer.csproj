@@ -11,8 +11,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Global.Http" Version="3.1.0" />
-    <PackageReference Include="LIN.Types.Cloud.Identity" Version="1.5.3" />
-    <PackageReference Include="LIN.Types.Developer" Version="1.5.0" />
+    <PackageReference Include="LIN.Types.Cloud.Identity" Version="1.6.0" />
+    <PackageReference Include="LIN.Types.Developer" Version="1.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
