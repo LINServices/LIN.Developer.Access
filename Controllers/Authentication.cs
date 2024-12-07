@@ -1,9 +1,7 @@
 ﻿namespace LIN.Access.Developer.Controllers;
 
-
 public class Authentication
 {
-
 
     /// <summary>
     /// Iniciar sesión.
@@ -29,7 +27,6 @@ public class Authentication
     }
 
 
-
     /// <summary>
     /// Iniciar sesión.
     /// </summary>
@@ -50,7 +47,5 @@ public class Authentication
         return Content;
 
     }
-
-
 
 }

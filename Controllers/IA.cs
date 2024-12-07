@@ -4,7 +4,6 @@ using Types.Enumerations;
 public class IA
 {
 
-
     /// <summary>
     /// Utiliza la IA de sentimientos
     /// </summary>
@@ -28,7 +27,6 @@ public class IA
     }
 
 
-
     /// <summary>
     /// Utiliza la IA de sentimientos
     /// </summary>
@@ -49,8 +47,5 @@ public class IA
         return Content;
 
     }
-
-
-
 
 }

@@ -1,9 +1,7 @@
 ﻿namespace LIN.Access.Developer.Controllers;
 
-
 public static class FirewallRule
 {
-
 
     /// <summary>
     /// Crea una regla de firewall
@@ -26,7 +24,6 @@ public static class FirewallRule
         return Content;
 
     }
-
 
 
     /// <summary>
@@ -55,7 +52,6 @@ public static class FirewallRule
     }
 
 
-
     /// <summary>
     /// Elimina una regla de acceso
     /// </summary>
@@ -80,6 +76,5 @@ public static class FirewallRule
         return Content;
 
     }
-
 
 }

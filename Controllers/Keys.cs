@@ -1,9 +1,7 @@
 ﻿namespace LIN.Access.Developer.Controllers;
 
-
 public static class Keys
 {
-
 
     /// <summary>
     /// Crea una api key
@@ -26,7 +24,6 @@ public static class Keys
         return Content;
 
     }
-
 
 
     /// <summary>
@@ -55,14 +52,12 @@ public static class Keys
     }
 
 
-
     /// <summary>
     /// Cambia el estado de una llave
     /// </summary>
     /// <param name="id">ID de la llave</param>
     /// <param name="estado">Nuevo estado</param>
     /// <param name="token">Token de acceso</param>
-    /// <returns></returns>
     public static async Task<ResponseBase> ChangeState(int id, ApiKeyStatus estado, string token)
     {
 
@@ -83,7 +78,5 @@ public static class Keys
         return Content;
 
     }
-
-
 
 }

@@ -1,13 +1,15 @@
 ﻿namespace LIN.Access.Developer.Controllers;
 
-
 public class Billings
 {
 
-
+    /// <summary>
+    /// Generar una transacción a una llave.
+    /// </summary>
+    /// <param name="key">Modelo.</param>
+    /// <param name="amount">Cuenta.</param>
     public static async Task<ReadOneResponse<TransactionResultModel>> Create(string key, decimal amount)
     {
-
 
         // Cliente HTTP.
         Client client = Service.GetClient("billing");
@@ -27,10 +29,12 @@ public class Billings
     }
 
 
-
-    public static async Task<ReadAllResponse<TransactionDataModel>> ReadAllAsync(string token)
+    /// <summary>
+    /// Obtener las transacciones.
+    /// </summary>
+    /// <param name="token">Token de acceso.</param>
+    public static async Task<ReadAllResponse<TransactionDataModel>> ReadAll(string token)
     {
-
 
         // Cliente HTTP.
         Client client = Service.GetClient("billing/all");
@@ -45,6 +49,5 @@ public class Billings
         return Content;
 
     }
-
 
 }

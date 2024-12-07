@@ -3,7 +3,6 @@
 public class Security
 {
 
-
     /// <summary>
     /// Validar código OTP.
     /// </summary>
@@ -28,7 +27,6 @@ public class Security
     }
 
 
-
     /// <summary>
     /// Remplazar el email.
     /// </summary>
@@ -51,7 +49,5 @@ public class Security
         return Content;
 
     }
-
-
 
 }

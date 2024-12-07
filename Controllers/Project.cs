@@ -1,9 +1,7 @@
 ﻿namespace LIN.Access.Developer.Controllers;
 
-
 public static class Project
 {
-
 
     /// <summary>
     /// Crea un nuevo proyecto
@@ -32,7 +30,6 @@ public static class Project
     }
 
 
-
     /// <summary>
     /// Obtiene los proyectos asociados a un perfil
     /// </summary>
@@ -53,7 +50,6 @@ public static class Project
         return Content;
 
     }
-
 
 
     /// <summary>
@@ -89,7 +85,6 @@ public static class Project
     }
 
 
-
     /// <summary>
     /// Elimina un proyecto
     /// </summary>
@@ -114,7 +109,5 @@ public static class Project
         return Content;
 
     }
-
-
 
 }

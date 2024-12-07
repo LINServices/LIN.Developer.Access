@@ -3,7 +3,6 @@
 public static class Profile
 {
 
-
     /// <summary>
     /// Crear perfil.
     /// </summary>
@@ -23,7 +22,6 @@ public static class Profile
         return Content;
 
     }
-
 
 
     /// <summary>
@@ -48,7 +46,6 @@ public static class Profile
     }
 
 
-
     /// <summary>
     /// Encontrar un perfil.
     /// </summary>
@@ -69,7 +66,5 @@ public static class Profile
         return Content;
 
     }
-
-
 
 }

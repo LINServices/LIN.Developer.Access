@@ -1,6 +1,5 @@
 ﻿namespace LIN.Access.Developer.Controllers;
 
-
 public class PDF
 {
 
@@ -32,7 +31,5 @@ public class PDF
         }
         return new();
     }
-
-
 
 }
