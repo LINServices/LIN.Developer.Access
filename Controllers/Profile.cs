@@ -67,4 +67,22 @@ public static class Profile
 
     }
 
+    public static async Task<ReadAllResponse<ProfileDataModel>> Search(string token, string param)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("profiles/search");
+
+        // Parámetros.
+        client.AddParameter("value", param);
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<ProfileDataModel>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
 }

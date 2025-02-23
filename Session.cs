@@ -64,8 +64,7 @@ public sealed class Session
         if (response.Response != Responses.Success)
             return (null, response.Response);
 
-
-        // Datos de la instancia
+        // Datos de la instancia.
         Instance.Information = response.Model.Profile;
         Instance.Account = response.Model.Account;
 
