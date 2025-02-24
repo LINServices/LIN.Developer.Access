@@ -35,7 +35,7 @@ public static class FirewallRule
     {
 
         // Cliente HTTP.
-        Client client = Service.GetClient("firewall");
+        Client client = Service.GetClient("firewall/all");
 
         // Headers.
         client.AddHeader("token", token);
