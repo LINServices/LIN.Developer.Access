@@ -110,4 +110,25 @@ public static class Project
 
     }
 
+
+
+    public static async Task<ReadOneResponse<int>> Validate(string key, string ip)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/validations");
+
+        // Headers.
+        client.AddHeader("key", key);
+
+        // Parámetros.
+        client.AddParameter("ip", ip);
+
+        // Resultado.
+        var Content = await client.Get<ReadOneResponse<int>>();
+
+        // Retornar.
+        return Content;
+    }
+
 }
