@@ -19,7 +19,7 @@ public static class Build
     public static IServiceCollection AddDeveloperService(this IServiceCollection service, string? url = null, string? app = null)
     {
         Service._Service = new();
-        Service._Service.SetDefault(url ?? "https://api.cloud.services.linplatform.com/");
+        Service._Service.SetDefault(url ?? "https://orchestrator.api.linplatform.com/");
         Application = app ?? "default";
         return service;
     }

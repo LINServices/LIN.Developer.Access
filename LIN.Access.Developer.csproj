@@ -10,10 +10,10 @@
 		<Version>4.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Global.Http" Version="3.4.0" />
+		<PackageReference Include="Global.Http" Version="3.6.0" />
 		<PackageReference Include="LIN.Types.Cloud.Identity" Version="3.2.0-pre" />
-		<PackageReference Include="LIN.Types.Developer" Version="1.9.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+		<PackageReference Include="LIN.Types.Developer" Version="1.9.4" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
 	</ItemGroup>
 </Project>
 

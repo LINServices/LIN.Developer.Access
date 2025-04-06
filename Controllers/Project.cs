@@ -8,18 +8,20 @@ public static class Project
     /// </summary>
     /// <param name="modelo">Modelo del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token, Dictionary<string, string> adicional)
+    public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token, Dictionary<string, object> adicional)
     {
 
         // Cliente HTTP.
         Client client = Service.GetClient("resources");
+
+        client.TimeOut = 60;
 
         // Headers.
         client.AddHeader("token", token);
 
         // Parámetros.
         foreach (var item in adicional)
-            client.AddParameter(item.Key, item.Value);
+            client.AddParameter(item.Key, item.Value.ToString());
         
         // Resultado.
         var Content = await client.Post<CreateResponse>(modelo);
@@ -71,9 +73,10 @@ public static class Project
 
         Dictionary<string, Type> types = new()
         {
-            {"DEFAULT", typeof(ProjectDataModel) },
+            {"default", typeof(ProjectDataModel) },
             {"postgre.db", typeof(LIN.Types.Developer.Projects.PostgreSQLProject) },
             {"bucket", typeof(LIN.Types.Developer.Projects.BucketProject) },
+            {"mongo", typeof(LIN.Types.Developer.Projects.MongoServerProject) },
         };
 
         // Resultado.
