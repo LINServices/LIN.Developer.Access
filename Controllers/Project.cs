@@ -77,6 +77,7 @@ public static class Project
             {"postgre.db", typeof(LIN.Types.Developer.Projects.PostgreSQLProject) },
             {"bucket", typeof(LIN.Types.Developer.Projects.BucketProject) },
             {"mongo", typeof(LIN.Types.Developer.Projects.MongoServerProject) },
+            {"payments", typeof(LIN.Types.Developer.Projects.PaymentProject) }
         };
 
         // Resultado.
