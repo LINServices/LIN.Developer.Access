@@ -1,4 +1,6 @@
-﻿namespace LIN.Access.Developer.Controllers;
+﻿using LIN.Types.Developer.TransactionModels;
+
+namespace LIN.Access.Developer.Controllers;
 
 public static class Project
 {
@@ -74,10 +76,12 @@ public static class Project
         Dictionary<string, Type> types = new()
         {
             {"default", typeof(ProjectDataModel) },
-            {"postgre.db", typeof(LIN.Types.Developer.Projects.PostgreSQLProject) },
-            {"bucket", typeof(LIN.Types.Developer.Projects.BucketProject) },
-            {"mongo", typeof(LIN.Types.Developer.Projects.MongoServerProject) },
-            {"payments", typeof(LIN.Types.Developer.Projects.PaymentProject) }
+            {"postgre.db", typeof(LIN.Types.Developer.Resources.Databases.PostgresResource) },
+            {"bucket", typeof(LIN.Types.Developer.Resources.BucketResource) },
+            {"mongo", typeof(LIN.Types.Developer.Resources.Databases.MongoResource) },
+            {"payments", typeof(LIN.Types.Developer.Resources.PaymentResource) },
+            {"redis", typeof(LIN.Types.Developer.Resources.Databases.RedisResource) },
+            {"rabbit", typeof(LIN.Types.Developer.Resources.Queues.RabbitResource) },
         };
 
         // Resultado.
@@ -130,6 +134,29 @@ public static class Project
 
         // Resultado.
         var Content = await client.Get<ReadOneResponse<int>>();
+
+        // Retornar.
+        return Content;
+    }
+
+
+
+    public static async Task<ReadAllResponse<PricingModel>> Pricings(string token, string type, Dictionary<string, object> adicional)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/pricing");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        client.AddParameter("type", type);
+
+        foreach(var item in adicional)
+            client.AddParameter(item.Key, item.Value.ToString());
+       
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<PricingModel>>();
 
         // Retornar.
         return Content;
