@@ -67,6 +67,8 @@ public static class Project
         // Cliente HTTP.
         Client client = Service.GetClient("resources");
 
+        client.TimeOut = 40;
+
         // Headers.
         client.AddHeader("token", token);
 
