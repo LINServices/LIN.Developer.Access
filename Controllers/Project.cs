@@ -84,6 +84,7 @@ public static class Project
             {"payments", typeof(LIN.Types.Developer.Resources.PaymentResource) },
             {"redis", typeof(LIN.Types.Developer.Resources.Databases.RedisResource) },
             {"rabbit", typeof(LIN.Types.Developer.Resources.Queues.RabbitResource) },
+            {"functions", typeof(LIN.Types.Developer.Resources.FunctionResource) },
         };
 
         // Resultado.
@@ -136,6 +137,26 @@ public static class Project
 
         // Resultado.
         var Content = await client.Get<ReadOneResponse<int>>();
+
+        // Retornar.
+        return Content;
+    }
+
+
+    public static async Task<ReadOneResponse<bool>> Validate(string token, int resource)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/validations/profile");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Parámetros.
+        client.AddParameter("resource", resource);
+
+        // Resultado.
+        var Content = await client.Get<ReadOneResponse<bool>>();
 
         // Retornar.
         return Content;

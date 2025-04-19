@@ -7,12 +7,12 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>$(AssemblyName)</Title>
 		<Authors>LIN Platform</Authors>
-		<Version>4.0.2</Version>
+		<Version>4.0.3</Version>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Global.Http" Version="3.8.0" />
+		<PackageReference Include="Global.Http" Version="3.9.0" />
 		<PackageReference Include="LIN.Types.Cloud.Identity" Version="3.2.0-pre" />
-		<PackageReference Include="LIN.Types.Developer" Version="2.0.0" />
+		<PackageReference Include="LIN.Types.Developer" Version="2.1.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
 	</ItemGroup>
 </Project>
