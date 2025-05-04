@@ -185,4 +185,21 @@ public static class Project
         return Content;
     }
 
+
+    public static async Task<ResponseBase> Confirm(string cloud)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/validations/confirm");
+
+        // Headers.
+        client.AddHeader("cloud", cloud);
+
+        // Resultado.
+        var Content = await client.Patch<ResponseBase>();
+
+        // Retornar.
+        return Content;
+    }
+
 }
