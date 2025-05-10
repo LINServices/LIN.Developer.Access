@@ -2,9 +2,6 @@
 global using LIN.Types.Developer.Enumerations;
 global using LIN.Types.Developer.Models;
 global using LIN.Types.Responses;
-global using System.Net.Http;
-global using System.Text;
-global using System.Text.Json;
 global using System.Threading.Tasks;
 
 namespace LIN.Access.Developer;

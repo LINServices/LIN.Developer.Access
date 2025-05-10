@@ -1,6 +1,6 @@
 ﻿namespace LIN.Access.Developer.Controllers;
 
-public static class FirewallRule
+public static class FirewallRules
 {
 
     /// <summary>

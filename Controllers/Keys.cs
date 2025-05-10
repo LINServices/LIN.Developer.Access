@@ -27,9 +27,9 @@ public static class Keys
 
 
     /// <summary>
-    /// Obtiene las llaves asociadas a un proyecto
+    /// Obtiene las llaves asociadas a un recurso.
     /// </summary>
-    /// <param name="id">ID del proyecto</param>
+    /// <param name="id">ID del recurso.</param>
     /// <param name="token">Token de acceso</param>
     public static async Task<ReadAllResponse<KeyModel>> ReadAll(int id, string token)
     {
@@ -53,7 +53,7 @@ public static class Keys
 
 
     /// <summary>
-    /// Cambia el estado de una llave
+    /// Cambia el estado de una llave.
     /// </summary>
     /// <param name="id">ID de la llave</param>
     /// <param name="estado">Nuevo estado</param>

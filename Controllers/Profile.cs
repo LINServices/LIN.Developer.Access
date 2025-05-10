@@ -67,6 +67,12 @@ public static class Profile
 
     }
 
+
+    /// <summary>
+    /// Buscar perfiles.
+    /// </summary>
+    /// <param name="token">Token de acceso.</param>
+    /// <param name="param">Parámetros de búsqueda.</param>
     public static async Task<ReadAllResponse<ProfileDataModel>> Search(string token, string param)
     {
 

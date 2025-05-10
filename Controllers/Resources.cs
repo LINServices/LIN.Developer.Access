@@ -2,13 +2,13 @@
 
 namespace LIN.Access.Developer.Controllers;
 
-public static class Project
+public static class Resources
 {
 
     /// <summary>
-    /// Crea un nuevo proyecto
+    /// Crea un nuevo recurso.
     /// </summary>
-    /// <param name="modelo">Modelo del proyecto</param>
+    /// <param name="modelo">Modelo del recurso</param>
     /// <param name="token">Token de acceso</param>
     public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token, Dictionary<string, object> adicional)
     {
@@ -24,7 +24,7 @@ public static class Project
         // Parámetros.
         foreach (var item in adicional)
             client.AddParameter(item.Key, item.Value.ToString());
-        
+
         // Resultado.
         var Content = await client.Post<CreateResponse>(modelo);
 
@@ -35,7 +35,7 @@ public static class Project
 
 
     /// <summary>
-    /// Obtiene los proyectos asociados a un perfil
+    /// Obtiene los recursos asociados a un perfil.
     /// </summary>
     /// <param name="token">Token de acceso</param>
     public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token)
@@ -57,9 +57,9 @@ public static class Project
 
 
     /// <summary>
-    /// Obtiene un proyecto
+    /// Obtiene un recurso.
     /// </summary>
-    /// <param name="id">ID del proyecto</param>
+    /// <param name="id">ID del recurso.</param>
     /// <param name="token">Token de acceso</param>
     public static async Task<ReadOneResponse<ProjectDataModel>> ReadOne(int id, string token)
     {
@@ -97,9 +97,9 @@ public static class Project
 
 
     /// <summary>
-    /// Elimina un proyecto
+    /// Elimina un recurso.
     /// </summary>
-    /// <param name="id">ID del proyecto</param>
+    /// <param name="id">ID del recurso.</param>
     /// <param name="token">Token de acceso</param>
     public static async Task<ResponseBase> Delete(int id, string token)
     {
@@ -122,7 +122,11 @@ public static class Project
     }
 
 
-
+    /// <summary>
+    /// Validar el acceso a un recurso.
+    /// </summary>
+    /// <param name="key">Llave de acceso.</param>
+    /// <param name="ip">Ip de acceso.</param>
     public static async Task<ReadOneResponse<int>> Validate(string key, string ip)
     {
 
@@ -143,6 +147,12 @@ public static class Project
     }
 
 
+    /// <summary>
+    /// Validar el acceso a un recurso.
+    /// </summary>
+    /// <param name="token">Token de acceso.</param>
+    /// <param name="resource">id del recurso.</param>
+    /// <returns></returns>
     public static async Task<ReadOneResponse<bool>> Validate(string token, int resource)
     {
 
@@ -163,7 +173,12 @@ public static class Project
     }
 
 
-
+    /// <summary>
+    /// Obtiene los precios de los recursos.
+    /// </summary>
+    /// <param name="token">Token de acceso.</param>
+    /// <param name="type">Tipo del recurso.</param>
+    /// <param name="adicional">Propiedades adicionales.</param>
     public static async Task<ReadAllResponse<PricingModel>> Pricings(string token, string type, Dictionary<string, object> adicional)
     {
 
@@ -175,9 +190,9 @@ public static class Project
 
         client.AddParameter("type", type);
 
-        foreach(var item in adicional)
+        foreach (var item in adicional)
             client.AddParameter(item.Key, item.Value.ToString());
-       
+
         // Resultado.
         var Content = await client.Get<ReadAllResponse<PricingModel>>();
 
@@ -186,6 +201,10 @@ public static class Project
     }
 
 
+    /// <summary>
+    /// Confirma el acceso a un recurso.
+    /// </summary>
+    /// <param name="cloud">Token de acceso cloud.</param>
     public static async Task<ResponseBase> Confirm(string cloud)
     {
 

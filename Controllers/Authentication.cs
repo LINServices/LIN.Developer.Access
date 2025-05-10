@@ -23,7 +23,6 @@ public class Authentication
 
         // Retornar.
         return Content;
-
     }
 
 
