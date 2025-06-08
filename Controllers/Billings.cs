@@ -50,4 +50,24 @@ public class Billings
 
     }
 
+
+
+    public static async Task<ReadAllResponse<SubscriptionPayment>> Payments(string token, int resource)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("payment/all");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddHeader("resource", resource);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<SubscriptionPayment>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
 }
