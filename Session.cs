@@ -24,7 +24,7 @@ public sealed class Session
     /// <summary>
     /// Información del usuario
     /// </summary>
-    public Types.Cloud.Identity.Models.AccountModel Account { get; private set; } = new();
+    public Types.Cloud.Identity.Models.Identities.AccountModel Account { get; private set; } = new();
 
 
     /// <summary>
