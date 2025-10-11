@@ -12,7 +12,7 @@
 	<ItemGroup>
 		<PackageReference Include="Global.Http" Version="3.9.0" />
 		<PackageReference Include="LIN.Types.Cloud.Identity" Version="2025.9.21" />
-		<PackageReference Include="LIN.Types.Developer" Version="2.3.0" />
+		<PackageReference Include="LIN.Types.Developer" Version="2.4.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
 	</ItemGroup>
 </Project>
