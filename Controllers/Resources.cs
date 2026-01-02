@@ -56,6 +56,24 @@ public static class Resources
     }
 
 
+    public static async Task<CreateResponse> GetTokenCloud(string token, int resource)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/token/cloud");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddHeader("resource", resource);
+
+        // Resultado.
+        var Content = await client.Get<CreateResponse>();
+
+        // Retornar.
+        return Content;
+    }
+
+
     /// <summary>
     /// Obtiene un recurso.
     /// </summary>
@@ -85,6 +103,8 @@ public static class Resources
             {"redis", typeof(LIN.Types.Developer.Resources.Databases.RedisResource) },
             {"rabbit", typeof(LIN.Types.Developer.Resources.Queues.RabbitResource) },
             {"functions", typeof(LIN.Types.Developer.Resources.FunctionResource) },
+            {"dotnet", typeof(LIN.Types.Developer.Resources.DotnetResource) },
+            {"valkey", typeof(LIN.Types.Developer.Resources.Databases.ValkeyResource) }
         };
 
         // Resultado.
@@ -118,7 +138,6 @@ public static class Resources
 
         // Retornar.
         return Content;
-
     }
 
 
