@@ -266,4 +266,67 @@ public static class Resources
 
     }
 
+
+    public static async Task<ResponseBase> Update(InviteUserDto userDto, string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("ResourcesShare");
+
+        client.TimeOut = 60;
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Patch<ResponseBase>(userDto);
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+    public static async Task<ResponseBase> DeleteMember(InviteUserDto userDto, string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("ResourcesShare");
+
+        client.TimeOut = 60;
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("profile", userDto.ProfileId);
+        client.AddParameter("resource", userDto.ResourceId);
+
+        // Resultado.
+        var Content = await client.Delete<ResponseBase>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+    public static async Task<ReadAllResponse<OwnerModel>> ReadMembers(int resource, string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("ResourcesShare");
+
+        client.TimeOut = 60;
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddHeader("resource", resource);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<OwnerModel>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
 }
