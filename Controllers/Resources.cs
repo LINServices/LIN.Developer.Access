@@ -240,4 +240,30 @@ public static class Resources
         return Content;
     }
 
+
+
+    /// <summary>
+    /// Crea un nuevo recurso.
+    /// </summary>
+    /// <param name="modelo">Modelo del recurso</param>
+    /// <param name="token">Token de acceso</param>
+    public static async Task<CreateResponse> Share(InviteUserDto userDto, string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("ResourcesShare");
+
+        client.TimeOut = 60;
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Post<CreateResponse>(userDto);
+
+        // Retornar.
+        return Content;
+
+    }
+
 }

@@ -29,6 +29,26 @@ public class Billings
     }
 
 
+    public static async Task<ReadAllResponse<BillingAccount>> ReadAllBillingAccounts(string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("billing");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<BillingAccount>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+
+
     /// <summary>
     /// Obtener las transacciones.
     /// </summary>
