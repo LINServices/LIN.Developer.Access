@@ -71,6 +71,26 @@ public class Billings
     }
 
 
+    public static async Task<CreateResponse> Create(string name, BillingAccountTypes types, string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("billing/create");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("name", name);
+        client.AddParameter("type", (int)types);
+
+        // Resultado.
+        var Content = await client.Post<CreateResponse>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
     public static async Task<ReadOneResponse<BillingAccount>> ReadBillingAccount(string token)
     {
 
