@@ -2,12 +2,6 @@
 
 public class Authentication
 {
-
-    /// <summary>
-    /// Iniciar sesión.
-    /// </summary>
-    /// <param name="cuenta">Usuario.</param>
-    /// <param name="password">Contraseña.</param>
     public static async Task<ReadOneResponse<Types.Cloud.Identity.Abstracts.AuthModel<ProfileDataModel>>> Login(string cuenta, string password)
     {
 
@@ -25,11 +19,6 @@ public class Authentication
         return Content;
     }
 
-
-    /// <summary>
-    /// Iniciar sesión.
-    /// </summary>
-    /// <param name="token">Token de acceso.</param>
     public static async Task<ReadOneResponse<Types.Cloud.Identity.Abstracts.AuthModel<ProfileDataModel>>> Login(string token)
     {
 
@@ -46,5 +35,4 @@ public class Authentication
         return Content;
 
     }
-
 }

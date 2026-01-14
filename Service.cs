@@ -2,13 +2,11 @@
 
 internal class Service
 {
-
     /// <summary>
     /// Servicio.
     /// </summary>
 
     public static Global.Http.Service _Service = new();
-
 
     /// <summary>
     /// Obtener un cliente.

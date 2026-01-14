@@ -3,11 +3,6 @@
 public class Billings
 {
 
-    /// <summary>
-    /// Crear una transacción.
-    /// </summary>
-    /// <param name="key">Llave de un recurso.</param>
-    /// <param name="amount">Valor a cobrar.</param>
     public static async Task<ReadOneResponse<TransactionResultModel>> Create(string key, decimal amount)
     {
 
@@ -46,13 +41,6 @@ public class Billings
 
     }
 
-
-
-
-    /// <summary>
-    /// Obtener las transacciones.
-    /// </summary>
-    /// <param name="token">Token de acceso.</param>
     public static async Task<ReadAllResponse<TransactionDataModel>> ReadAll(string token)
     {
 
