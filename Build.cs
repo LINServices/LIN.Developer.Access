@@ -4,12 +4,10 @@ namespace LIN.Access.Developer;
 
 public static class Build
 {
-
     /// <summary>
     /// Autenticación de la aplicación.
     /// </summary>
     internal static string Application { get; set; } = string.Empty;
-
 
     /// <summary>
     /// Utilizar LIN Authentication.
@@ -23,5 +21,4 @@ public static class Build
         Application = app ?? "default";
         return service;
     }
-
 }

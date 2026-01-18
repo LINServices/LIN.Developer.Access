@@ -104,7 +104,8 @@ public static class Resources
             {"rabbit", typeof(LIN.Types.Developer.Resources.Queues.RabbitResource) },
             {"functions", typeof(LIN.Types.Developer.Resources.FunctionResource) },
             {"dotnet", typeof(LIN.Types.Developer.Resources.DotnetResource) },
-            {"valkey", typeof(LIN.Types.Developer.Resources.Databases.ValkeyResource) }
+            {"valkey", typeof(LIN.Types.Developer.Resources.Databases.ValkeyResource) },
+            {"staticweb", typeof(LIN.Types.Developer.Resources.StaticWebSiteResource) }
         };
 
         // Resultado.
@@ -113,6 +114,71 @@ public static class Resources
         // Retornar.
         return Content;
 
+    }
+
+    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOneByKey(string key)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/validations/readproject");
+
+        client.TimeOut = 40;
+
+        // Headers.
+        client.AddHeader("key", key);
+
+        Dictionary<string, Type> types = new()
+        {
+            {"default", typeof(ProjectDataModel) },
+            {"postgre.db", typeof(LIN.Types.Developer.Resources.Databases.PostgresResource) },
+            {"bucket", typeof(LIN.Types.Developer.Resources.BucketResource) },
+            {"mongo", typeof(LIN.Types.Developer.Resources.Databases.MongoResource) },
+            {"payments", typeof(LIN.Types.Developer.Resources.PaymentResource) },
+            {"redis", typeof(LIN.Types.Developer.Resources.Databases.RedisResource) },
+            {"rabbit", typeof(LIN.Types.Developer.Resources.Queues.RabbitResource) },
+            {"functions", typeof(LIN.Types.Developer.Resources.FunctionResource) },
+            {"dotnet", typeof(LIN.Types.Developer.Resources.DotnetResource) },
+            {"valkey", typeof(LIN.Types.Developer.Resources.Databases.ValkeyResource) }
+        };
+
+        // Resultado.
+        var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type");
+
+        // Retornar.
+        return Content;
+    }
+
+
+    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOneByCloud(string cloud)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/validations/readprojectbycloud");
+
+        client.TimeOut = 40;
+
+        // Headers.
+        client.AddHeader("cloud", cloud);
+
+        Dictionary<string, Type> types = new()
+        {
+            {"default", typeof(ProjectDataModel) },
+            {"postgre.db", typeof(LIN.Types.Developer.Resources.Databases.PostgresResource) },
+            {"bucket", typeof(LIN.Types.Developer.Resources.BucketResource) },
+            {"mongo", typeof(LIN.Types.Developer.Resources.Databases.MongoResource) },
+            {"payments", typeof(LIN.Types.Developer.Resources.PaymentResource) },
+            {"redis", typeof(LIN.Types.Developer.Resources.Databases.RedisResource) },
+            {"rabbit", typeof(LIN.Types.Developer.Resources.Queues.RabbitResource) },
+            {"functions", typeof(LIN.Types.Developer.Resources.FunctionResource) },
+            {"dotnet", typeof(LIN.Types.Developer.Resources.DotnetResource) },
+            {"valkey", typeof(LIN.Types.Developer.Resources.Databases.ValkeyResource) }
+        };
+
+        // Resultado.
+        var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type");
+
+        // Retornar.
+        return Content;
     }
 
 
