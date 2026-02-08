@@ -29,7 +29,66 @@ public static class Tickets
     {
 
         // Cliente HTTP.
-        Client client = Service.GetClient("tickets/my-tickets");
+        Client client = Service.GetClient("tickets");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<TicketMongoModel>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+    public static async Task<ResponseBase> Asociate(string token, string ticket, int profile)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("tickets/agents");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("id", ticket);
+        client.AddParameter("profile", profile);
+
+        // Resultado.
+        var Content = await client.Post<ResponseBase>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+
+
+    public static async Task<ReadAllResponse<TicketMongoModel>> ReadAllAll(string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("tickets/all");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<TicketMongoModel>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+
+    public static async Task<ReadAllResponse<TicketMongoModel>> ReadAllForAgents(string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("tickets/agents");
 
         // Headers.
         client.AddHeader("token", token);
@@ -73,6 +132,25 @@ public static class Tickets
 
         // Resultado.
         var Content = await client.Get<ReadOneResponse<TicketDetailDto>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+
+    public static async Task<ReadOneResponse<AgentMongoModel>> ReadAgent(string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient($"agents");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Get<ReadOneResponse<AgentMongoModel>>();
 
         // Retornar.
         return Content;
