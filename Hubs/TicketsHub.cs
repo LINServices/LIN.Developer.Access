@@ -7,6 +7,7 @@ public class TicketsHubClient
     private readonly HubConnection _connection;
 
     public event Action<string>? OnTicketUpdated;
+    public event Action<string>? OnTicketEventUpdated;
     public event Action? OnConnected;
     public event Action? OnDisconnected;
     public event Action<Exception?>? OnReconnecting;
@@ -25,6 +26,11 @@ public class TicketsHubClient
     {
         // Evento enviado por el servidor
         _connection.On<string>("TicketEventAdded", message =>
+        {
+            OnTicketEventUpdated?.Invoke(message);
+        });
+
+        _connection.On<string>("TicketUpdated", message =>
         {
             OnTicketUpdated?.Invoke(message);
         });
