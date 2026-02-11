@@ -12,7 +12,7 @@
 	<ItemGroup>
 		<PackageReference Include="Global.Http" Version="4.0.0" />
 		<PackageReference Include="LIN.Types.Cloud.Identity" Version="2026.1.26" />
-		<PackageReference Include="LIN.Types.Developer" Version="3.0.11" />
+		<PackageReference Include="LIN.Types.Developer" Version="3.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.2" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
 	</ItemGroup>

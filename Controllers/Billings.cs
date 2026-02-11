@@ -41,6 +41,25 @@ public class Billings
 
     }
 
+
+    public static async Task<ReadOneStringResponse> Charge(string token, int billing, string email, int amount)
+    {
+        // Cliente HTTP.
+        Client client = Service.GetClient("billing/charge");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("accountId", billing);
+        client.AddParameter("email", email);
+        client.AddParameter("amount", amount );
+
+        // Resultado.
+        var Content = await client.Patch<ReadOneStringResponse>();
+
+        // Retornar.
+        return Content;
+    }
+
     public static async Task<ReadAllResponse<TransactionDataModel>> ReadAll(string token)
     {
 
@@ -79,14 +98,15 @@ public class Billings
     }
 
 
-    public static async Task<ReadOneResponse<BillingAccount>> ReadBillingAccount(string token)
+    public static async Task<ReadOneResponse<BillingAccount>> ReadBillingAccount(string token, int billing)
     {
 
         // Cliente HTTP.
-        Client client = Service.GetClient("billing");
+        Client client = Service.GetClient("billing/byid");
 
         // Headers.
         client.AddHeader("token", token);
+        client.AddHeader("id", billing);
 
         // Resultado.
         var Content = await client.Get<ReadOneResponse<BillingAccount>>();
