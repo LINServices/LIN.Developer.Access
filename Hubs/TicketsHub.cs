@@ -73,20 +73,22 @@ public class TicketsHubClient
 
     public async Task<SubscribeResponse?> SubscribeAsync(string ticketId)
     {
-        EnsureConnected();
+        await EnsureConnected();
         return await _connection.InvokeAsync<SubscribeResponse>("Subscribe", ticketId);
     }
 
     public async Task UnsubscribeAsync(string ticketId)
     {
-        EnsureConnected();
+        await EnsureConnected();
         await _connection.InvokeAsync("Unsubscribe", ticketId);
     }
 
-    private void EnsureConnected()
+    private async Task EnsureConnected()
     {
         if (_connection.State != HubConnectionState.Connected)
-            throw new InvalidOperationException("No conectado al hub.");
+        {
+            await _connection.StartAsync();
+        }
     }
 }
 

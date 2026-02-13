@@ -25,7 +25,7 @@ public static class Tickets
     }
 
 
-    public static async Task<ReadAllResponse<TicketMongoModel>> ReadAll(string token)
+    public static async Task<ReadAllResponse<TicketDetailDto>> ReadAll(string token)
     {
 
         // Cliente HTTP.
@@ -35,7 +35,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<TicketMongoModel>>();
+        var Content = await client.Get<ReadAllResponse<TicketDetailDto>>();
 
         // Retornar.
         return Content;
@@ -65,7 +65,7 @@ public static class Tickets
 
 
 
-    public static async Task<ReadAllResponse<TicketMongoModel>> ReadAllAll(string token)
+    public static async Task<ReadAllResponse<TicketDetailDto>> ReadAllAll(string token)
     {
 
         // Cliente HTTP.
@@ -75,7 +75,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<TicketMongoModel>>();
+        var Content = await client.Get<ReadAllResponse<TicketDetailDto>>();
 
         // Retornar.
         return Content;
@@ -84,7 +84,7 @@ public static class Tickets
 
 
 
-    public static async Task<ReadAllResponse<TicketMongoModel>> ReadAllForAgents(string token)
+    public static async Task<ReadAllResponse<TicketDetailDto>> ReadAllForAgents(string token)
     {
 
         // Cliente HTTP.
@@ -94,7 +94,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<TicketMongoModel>>();
+        var Content = await client.Get<ReadAllResponse<TicketDetailDto>>();
 
         // Retornar.
         return Content;
