@@ -107,7 +107,8 @@ public static class Resources
             {"valkey", typeof(LIN.Types.Developer.Resources.Databases.ValkeyResource) },
             {"staticweb", typeof(LIN.Types.Developer.Resources.StaticWebSiteResource) },
             {"mysql", typeof(LIN.Types.Developer.Resources.Databases.MySqlResource) },
-            {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) }
+            {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) },
+            {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
         };
 
         // Resultado.
@@ -142,7 +143,8 @@ public static class Resources
             {"dotnet", typeof(LIN.Types.Developer.Resources.DotnetResource) },
             {"valkey", typeof(LIN.Types.Developer.Resources.Databases.ValkeyResource) },
             {"mysql", typeof(LIN.Types.Developer.Resources.Databases.MySqlResource) },
-            {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) }
+            {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) },
+            {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
         };
 
         // Resultado.
@@ -177,7 +179,8 @@ public static class Resources
             {"dotnet", typeof(LIN.Types.Developer.Resources.DotnetResource) },
             {"valkey", typeof(LIN.Types.Developer.Resources.Databases.ValkeyResource) },
             {"mysql", typeof(LIN.Types.Developer.Resources.Databases.MySqlResource) },
-            {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) }
+            {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) },
+            {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
         };
 
         // Resultado.
