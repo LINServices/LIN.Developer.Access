@@ -38,11 +38,33 @@ public static class Resources
     /// Obtiene los recursos asociados a un perfil.
     /// </summary>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token)
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token, int? baseResource = null)
     {
 
         // Cliente HTTP.
         Client client = Service.GetClient("resources/all");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        if (baseResource != null)
+        {
+            client.AddParameter("baseResource", baseResource.Value);
+        }
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllBases(string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/groups/all");
 
         // Headers.
         client.AddHeader("token", token);
@@ -72,6 +94,27 @@ public static class Resources
         // Retornar.
         return Content;
     }
+
+    public static async Task<ResponseBase> Asociate(string token, int resource, int? group)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/groups/asociate");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("resource", resource);
+
+        if (group != null)
+        client.AddParameter("group", group.Value);
+
+        // Resultado.
+        var Content = await client.Post<ResponseBase>();
+
+        // Retornar.
+        return Content;
+    }
+
 
 
     /// <summary>
@@ -261,6 +304,27 @@ public static class Resources
 
         // Resultado.
         var Content = await client.Get<ReadOneResponse<bool>>();
+
+        // Retornar.
+        return Content;
+    }
+
+
+    public static async Task<ResponseBase> UpdateName(string token, int resource, string name)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/name");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Parámetros.
+        client.AddParameter("resource", resource);
+        client.AddParameter("name", name);
+
+        // Resultado.
+        var Content = await client.Post<ResponseBase>();
 
         // Retornar.
         return Content;
