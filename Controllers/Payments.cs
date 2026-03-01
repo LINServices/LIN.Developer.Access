@@ -36,20 +36,5 @@ public class Payments
         return Content;
     }
 
-    public static async Task<ReadAllResponse<SubscriptionPayment>> ReadAllPendingFails(int billing, string token)
-    {
 
-        // Cliente HTTP.
-        Client client = Service.GetClient("payment/pendings");
-
-        // Headers.
-        client.AddHeader("token", token);
-        client.AddHeader("billing", billing);
-
-        // Resultado.
-        var Content = await client.Get<ReadAllResponse<SubscriptionPayment>>();
-
-        // Retornar.
-        return Content;
-    }
 }
