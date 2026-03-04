@@ -78,6 +78,24 @@ public static class Resources
     }
 
 
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllPlans(string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/plans/all");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
     public static async Task<CreateResponse> GetTokenCloud(string token, int resource)
     {
 
@@ -152,6 +170,7 @@ public static class Resources
             {"mysql", typeof(LIN.Types.Developer.Resources.Databases.MySqlResource) },
             {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) },
             {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
+            {"plan", typeof(LIN.Types.Developer.Resources.PlanResource) },
         };
 
         // Resultado.
@@ -188,6 +207,7 @@ public static class Resources
             {"mysql", typeof(LIN.Types.Developer.Resources.Databases.MySqlResource) },
             {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) },
             {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
+             {"plan", typeof(LIN.Types.Developer.Resources.PlanResource) },
         };
 
         // Resultado.
@@ -224,10 +244,30 @@ public static class Resources
             {"mysql", typeof(LIN.Types.Developer.Resources.Databases.MySqlResource) },
             {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) },
             {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
+             {"plan", typeof(LIN.Types.Developer.Resources.PlanResource) },
         };
 
         // Resultado.
         var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type");
+
+        // Retornar.
+        return Content;
+    }
+
+
+    public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelations(string cloud)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/validations/readprojectasociations");
+
+        client.TimeOut = 40;
+
+        // Headers.
+        client.AddHeader("cloud", cloud);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>();
 
         // Retornar.
         return Content;
