@@ -126,7 +126,7 @@ public static class Resources
         client.AddParameter("resource", resource);
 
         if (group != null)
-        client.AddParameter("group", group.Value);
+            client.AddParameter("group", group.Value);
 
         // Resultado.
         var Content = await client.Post<ResponseBase>();

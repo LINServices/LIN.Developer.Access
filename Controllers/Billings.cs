@@ -51,7 +51,7 @@ public class Billings
         client.AddHeader("token", token);
         client.AddParameter("accountId", billing);
         client.AddParameter("email", email);
-        client.AddParameter("amount", amount );
+        client.AddParameter("amount", amount);
 
         // Resultado.
         var Content = await client.Patch<ReadOneStringResponse>();

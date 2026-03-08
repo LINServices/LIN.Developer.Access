@@ -159,7 +159,7 @@ public static class Tickets
 
 
 
-    public static async Task<ResponseBase> PostEvent(string ticket, AddTicketEventRequest evento, string token )
+    public static async Task<ResponseBase> PostEvent(string ticket, AddTicketEventRequest evento, string token)
     {
 
         // Cliente HTTP.
@@ -177,7 +177,7 @@ public static class Tickets
     }
 
 
-    public static async Task<ReadAllResponse<TicketEvent>> GetEvents(string ticket,string token)
+    public static async Task<ReadAllResponse<TicketEvent>> GetEvents(string ticket, string token)
     {
 
         // Cliente HTTP.
