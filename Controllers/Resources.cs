@@ -96,7 +96,21 @@ public static class Resources
     }
 
 
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllConfigurations(string token)
+    {
 
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/configurations/all");
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+
+        // Retornar.
+        return Content;
+
+    }
 
     public static async Task<CreateResponse> GetTokenCloud(string token, int resource)
     {
@@ -127,6 +141,24 @@ public static class Resources
 
         if (group != null)
             client.AddParameter("group", group.Value);
+
+        // Resultado.
+        var Content = await client.Post<ResponseBase>();
+
+        // Retornar.
+        return Content;
+    }
+
+    public static async Task<ResponseBase> AsociateToConfiguration(string token, int resource, int configuration)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/configuration/asociate");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("resource", resource);
+        client.AddParameter("configurationResource", configuration);
 
         // Resultado.
         var Content = await client.Post<ResponseBase>();
@@ -262,6 +294,24 @@ public static class Resources
 
         // Cliente HTTP.
         Client client = Service.GetClient("resources/validations/readprojectasociations");
+
+        client.TimeOut = 40;
+
+        // Headers.
+        client.AddHeader("cloud", cloud);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>();
+
+        // Retornar.
+        return Content;
+    }
+
+    public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelationsMe(string cloud)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/validations/readprojectasociationsme");
 
         client.TimeOut = 40;
 
