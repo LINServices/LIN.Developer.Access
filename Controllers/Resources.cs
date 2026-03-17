@@ -80,7 +80,6 @@ public static class Resources
 
     public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllPlans(string token)
     {
-
         // Cliente HTTP.
         Client client = Service.GetClient("resources/plans/all");
 
@@ -92,7 +91,6 @@ public static class Resources
 
         // Retornar.
         return Content;
-
     }
 
 
