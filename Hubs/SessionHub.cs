@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using System.Diagnostics;
 
 namespace LIN.Access.Developer.Hubs;
 
@@ -12,6 +13,7 @@ public class SessionHub
     public event Action? OnConnected;
     public event Action? OnDisconnected;
     public event Action<Exception?>? OnReconnecting;
+    public event Action<Exception>? OnError;
 
     public SessionHub(string token)
     {
@@ -25,66 +27,152 @@ public class SessionHub
 
     private void RegisterEvents()
     {
-        // Evento enviado por el servidor
         _connection.On<int>("#newResource", message =>
         {
-            OnNewResource?.Invoke(message);
+            try
+            {
+                OnNewResource?.Invoke(message);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
         });
 
         _connection.On<int>("#updateResource", message =>
         {
-            OnUpdateResource?.Invoke(message);
+            try
+            {
+                OnUpdateResource?.Invoke(message);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
         });
 
         _connection.Reconnecting += error =>
         {
-            OnReconnecting?.Invoke(error);
+            try
+            {
+                OnReconnecting?.Invoke(error);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
+
             return Task.CompletedTask;
         };
 
         _connection.Reconnected += _ =>
         {
-            OnConnected?.Invoke();
+            try
+            {
+                OnConnected?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
+
             return Task.CompletedTask;
         };
 
-        _connection.Closed += _ =>
+        _connection.Closed += error =>
         {
-            OnDisconnected?.Invoke();
+            try
+            {
+                OnDisconnected?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
+
             return Task.CompletedTask;
         };
     }
 
     public async Task ConnectAsync()
     {
-        if (_connection.State == HubConnectionState.Connected)
-            return;
+        try
+        {
+            if (_connection.State == HubConnectionState.Connected)
+                return;
 
-        await _connection.StartAsync();
-        OnConnected?.Invoke();
-        await SubscribeAsync();
+            await _connection.StartAsync();
+
+            try
+            {
+                OnConnected?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
+
+            await SubscribeAsync();
+        }
+        catch (Exception ex)
+        {
+            HandleError(ex);
+        }
     }
 
     public async Task DisconnectAsync()
     {
-        if (_connection.State != HubConnectionState.Connected)
-            return;
+        try
+        {
+            if (_connection.State != HubConnectionState.Connected)
+                return;
 
-        await _connection.StopAsync();
+            await _connection.StopAsync();
+        }
+        catch (Exception ex)
+        {
+            HandleError(ex);
+        }
     }
 
     public async Task SubscribeAsync()
     {
-        await EnsureConnected();
-        await _connection.InvokeAsync("Subscribe");
+        try
+        {
+            await EnsureConnected();
+            await _connection.InvokeAsync("Subscribe");
+        }
+        catch (Exception ex)
+        {
+            HandleError(ex);
+        }
     }
-
 
     private async Task EnsureConnected()
     {
-        if (_connection.State != HubConnectionState.Connected)
+        try
         {
-            await _connection.StartAsync();
+            if (_connection.State != HubConnectionState.Connected)
+            {
+                await _connection.StartAsync();
+            }
         }
+        catch (Exception ex)
+        {
+            HandleError(ex);
+        }
+    }
+
+    private void HandleError(Exception ex)
+    {
+        try
+        {
+            OnError?.Invoke(ex);
+        }
+        catch
+        {
+        }
+
+        Debug.WriteLine(ex);
     }
 }
