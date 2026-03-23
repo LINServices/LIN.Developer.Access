@@ -9,6 +9,7 @@ public class SessionHub
 
     public event Action<int>? OnNewResource;
     public event Action<int>? OnUpdateResource;
+    public event Action? OnNewNotification;
 
     public event Action? OnConnected;
     public event Action? OnDisconnected;
@@ -44,6 +45,18 @@ public class SessionHub
             try
             {
                 OnUpdateResource?.Invoke(message);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
+        });
+
+        _connection.On<int>("#newNotification", (id) =>
+        {
+            try
+            {
+                OnNewNotification?.Invoke();
             }
             catch (Exception ex)
             {

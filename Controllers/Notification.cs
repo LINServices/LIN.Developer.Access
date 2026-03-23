@@ -22,13 +22,13 @@ public static class Notifications
     {
 
         // Cliente HTTP.
-        Client client = Service.GetClient("notifications");
+        Client client = Service.GetClient("notifications/read-all");
 
         // Headers.
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Delete<ResponseBase>();
+        var Content = await client.Put<ResponseBase>();
 
         // Retornar.
         return Content;
