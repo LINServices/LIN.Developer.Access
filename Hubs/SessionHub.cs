@@ -148,6 +148,38 @@ public class SessionHub
         }
     }
 
+    public async Task ReconnectAsync()
+    {
+        try
+        {
+            // Si ya está conectado, no hace nada
+            if (_connection.State == HubConnectionState.Connected)
+                return;
+
+            // Si está en proceso de conexión, espera
+            if (_connection.State == HubConnectionState.Connecting ||
+                _connection.State == HubConnectionState.Reconnecting)
+                return;
+
+            await _connection.StartAsync();
+
+            try
+            {
+                OnConnected?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                HandleError(ex);
+            }
+
+            await SubscribeAsync();
+        }
+        catch (Exception ex)
+        {
+            HandleError(ex);
+        }
+    }
+
     public async Task SubscribeAsync()
     {
         try
