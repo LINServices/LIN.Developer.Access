@@ -190,7 +190,7 @@ public static class Resources
         {
             {"default", typeof(ProjectDataModel) },
             {"postgre.db", typeof(LIN.Types.Developer.Resources.Databases.PostgresResource) },
-            {"bucket", typeof(LIN.Types.Developer.Resources.BucketResource) },
+            {"bucket", typeof(LIN.Types.Developer.Resources.MiniIoResource) },
             {"mongo", typeof(LIN.Types.Developer.Resources.Databases.MongoResource) },
             {"payments", typeof(LIN.Types.Developer.Resources.PaymentResource) },
             {"redis", typeof(LIN.Types.Developer.Resources.Databases.RedisResource) },
@@ -228,7 +228,7 @@ public static class Resources
         {
             {"default", typeof(ProjectDataModel) },
             {"postgre.db", typeof(LIN.Types.Developer.Resources.Databases.PostgresResource) },
-            {"bucket", typeof(LIN.Types.Developer.Resources.BucketResource) },
+            {"bucket", typeof(LIN.Types.Developer.Resources.MiniIoResource) },
             {"mongo", typeof(LIN.Types.Developer.Resources.Databases.MongoResource) },
             {"payments", typeof(LIN.Types.Developer.Resources.PaymentResource) },
             {"redis", typeof(LIN.Types.Developer.Resources.Databases.RedisResource) },
@@ -265,7 +265,7 @@ public static class Resources
         {
             {"default", typeof(ProjectDataModel) },
             {"postgre.db", typeof(LIN.Types.Developer.Resources.Databases.PostgresResource) },
-            {"bucket", typeof(LIN.Types.Developer.Resources.BucketResource) },
+            {"bucket", typeof(LIN.Types.Developer.Resources.MiniIoResource) },
             {"mongo", typeof(LIN.Types.Developer.Resources.Databases.MongoResource) },
             {"payments", typeof(LIN.Types.Developer.Resources.PaymentResource) },
             {"redis", typeof(LIN.Types.Developer.Resources.Databases.RedisResource) },
