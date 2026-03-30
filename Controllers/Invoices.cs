@@ -22,19 +22,17 @@ public class Invoices
         return Content;
     }
 
-
-    public static async Task<ReadAllResponse<LIN.Types.Developer.BillingModels.InvoiceItem>> Items(string token, int invoice)
+    public static async Task<ReadOneResponse<InvoiceDto>> Read(string token, int invoice)
     {
 
         // Cliente HTTP.
-        Client client = Service.GetClient("invoices/items");
+        Client client = Service.GetClient($"invoices/{invoice}");
 
         // Headers.
         client.AddHeader("token", token);
-        client.AddParameter("invoiceId", invoice);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<InvoiceItem>>();
+        var Content = await client.Get<ReadOneResponse<InvoiceDto>>();
 
         // Retornar.
         return Content;
