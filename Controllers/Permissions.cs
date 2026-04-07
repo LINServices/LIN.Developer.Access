@@ -25,4 +25,23 @@ public static class Permissions
 
     }
 
+
+    public static async Task<ReadAllResponse<PermissionModel>> GetAll(string token, int resource)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("rbac/profiles/roles/permissions");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("resourceId", resource);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<PermissionModel>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
 }
