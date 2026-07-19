@@ -203,6 +203,7 @@ public static class Resources
             {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) },
             {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
             {"plan", typeof(LIN.Types.Developer.Resources.PlanResource) },
+            {"ai", typeof(LIN.Types.Developer.Resources.IAResource) },
         };
 
         // Resultado.
@@ -240,6 +241,7 @@ public static class Resources
             {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) },
             {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
              {"plan", typeof(LIN.Types.Developer.Resources.PlanResource) },
+             {"ai", typeof(LIN.Types.Developer.Resources.IAResource) },
         };
 
         // Resultado.
@@ -277,6 +279,7 @@ public static class Resources
             {"gateway", typeof(LIN.Types.Developer.Resources.OcelotResource) },
             {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
              {"plan", typeof(LIN.Types.Developer.Resources.PlanResource) },
+             {"ai", typeof(LIN.Types.Developer.Resources.IAResource) },
         };
 
         // Resultado.
