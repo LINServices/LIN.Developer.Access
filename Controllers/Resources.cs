@@ -110,6 +110,23 @@ public static class Resources
 
     }
 
+
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllVectors(string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/vectors/all");
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
     public static async Task<CreateResponse> GetTokenCloud(string token, int resource)
     {
 
@@ -157,6 +174,25 @@ public static class Resources
         client.AddHeader("token", token);
         client.AddParameter("resource", resource);
         client.AddParameter("configurationResource", configuration);
+
+        // Resultado.
+        var Content = await client.Post<ResponseBase>();
+
+        // Retornar.
+        return Content;
+    }
+
+
+    public static async Task<ResponseBase> AsociateToRag(string token, int resource, int vector)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("resources/rag/asociate");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("resource", resource);
+        client.AddParameter("vectorResource", vector);
 
         // Resultado.
         var Content = await client.Post<ResponseBase>();
