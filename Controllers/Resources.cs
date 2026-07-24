@@ -204,6 +204,7 @@ public static class Resources
             {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
             {"plan", typeof(LIN.Types.Developer.Resources.PlanResource) },
             {"ai", typeof(LIN.Types.Developer.Resources.IAResource) },
+            {"vector", typeof(LIN.Types.Developer.Resources.VectorResource) },
         };
 
         // Resultado.
@@ -242,6 +243,7 @@ public static class Resources
             {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
              {"plan", typeof(LIN.Types.Developer.Resources.PlanResource) },
              {"ai", typeof(LIN.Types.Developer.Resources.IAResource) },
+             {"vector", typeof(LIN.Types.Developer.Resources.VectorResource) },
         };
 
         // Resultado.
@@ -280,6 +282,7 @@ public static class Resources
             {"node", typeof(LIN.Types.Developer.Resources.NodeResource) },
              {"plan", typeof(LIN.Types.Developer.Resources.PlanResource) },
              {"ai", typeof(LIN.Types.Developer.Resources.IAResource) },
+             {"vector", typeof(LIN.Types.Developer.Resources.VectorResource) },
         };
 
         // Resultado.
