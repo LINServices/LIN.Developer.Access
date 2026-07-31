@@ -5,6 +5,30 @@ namespace LIN.Access.Developer.Controllers;
 public static class RolePermissions
 {
 
+   
+    public static async Task<ReadOneResponse<bool>> Validate(string token, string permission, int resourceId)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("rbac/profiles/permissions/validate");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Parámetros.
+        client.AddParameter("permission", permission);
+        client.AddParameter("resourceId", resourceId.ToString());
+
+        // Resultado.
+        var Content = await client.Get<ReadOneResponse<bool>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+
     /// <summary>
     /// Obtiene todos los permisos asignados a un rol específico.
     /// </summary>
