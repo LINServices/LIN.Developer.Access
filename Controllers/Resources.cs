@@ -127,22 +127,6 @@ public static class Resources
 
     }
 
-    public static async Task<CreateResponse> GetTokenCloud(string token, int resource)
-    {
-
-        // Cliente HTTP.
-        Client client = Service.GetClient("resources/token/cloud");
-
-        // Headers.
-        client.AddHeader("token", token);
-        client.AddHeader("resource", resource);
-
-        // Resultado.
-        var Content = await client.Get<CreateResponse>();
-
-        // Retornar.
-        return Content;
-    }
 
     public static async Task<ResponseBase> Asociate(string token, int resource, int? group)
     {
@@ -212,15 +196,12 @@ public static class Resources
     {
 
         // Cliente HTTP.
-        Client client = Service.GetClient("resources");
+        Client client = Service.GetClient($"resources/{id}");
 
         client.TimeOut = 40;
 
         // Headers.
         client.AddHeader("token", token);
-
-        // Parámetros.
-        client.AddParameter("id", id);
 
         Dictionary<string, Type> types = new()
         {

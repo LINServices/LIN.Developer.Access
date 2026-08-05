@@ -35,7 +35,7 @@ public static class RolePermissions
     /// <param name="token">Token de acceso</param>
     /// <param name="roleId">ID del rol</param>
     /// <param name="resourceId">ID del recurso</param>
-    public static async Task<ReadAllResponse<PermissionModel>> GetByRole(string token, int roleId, int resourceId)
+    public static async Task<ReadAllResponse<PermissionModel>> GetByRole(string token, string roleId, int resourceId)
     {
 
         // Cliente HTTP.
@@ -64,7 +64,7 @@ public static class RolePermissions
     /// <param name="roleId">ID del rol</param>
     /// <param name="permissionId">ID del permiso</param>
     /// <param name="resourceId">ID del recurso</param>
-    public static async Task<ResponseBase> AddPermission(string token, int roleId, int permissionId, int resourceId)
+    public static async Task<ResponseBase> AddPermission(string token, string roleId, int permissionId, int resourceId)
     {
 
         // Cliente HTTP.
@@ -94,7 +94,7 @@ public static class RolePermissions
     /// <param name="roleId">ID del rol</param>
     /// <param name="permissionId">ID del permiso</param>
     /// <param name="resourceId">ID del recurso</param>
-    public static async Task<ResponseBase> RemovePermission(string token, int roleId, int permissionId, int resourceId)
+    public static async Task<ResponseBase> RemovePermission(string token, string roleId, int permissionId, int resourceId)
     {
         // Cliente HTTP.
         Client client = Service.GetClient("rbac/roles/permissions");

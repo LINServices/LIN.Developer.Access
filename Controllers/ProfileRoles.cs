@@ -38,7 +38,7 @@ public static class ProfileRoles
     /// <param name="resourceId">Id del recurso.</param>
     /// <param name="roleId">Id del rol.</param>
     /// <param name="token">Token de acceso.</param>
-    public static async Task<ResponseBase> Add(int profileId, int resourceId, int roleId, string token)
+    public static async Task<ResponseBase> Add(int profileId, int resourceId, string roleId, string token)
     {
 
         // Cliente HTTP.
@@ -65,7 +65,7 @@ public static class ProfileRoles
     /// <param name="resourceId">Id del recurso.</param>
     /// <param name="roleId">Id del rol.</param>
     /// <param name="token">Token de acceso.</param>
-    public static async Task<ResponseBase> Remove(int profileId, int resourceId, int roleId, string token)
+    public static async Task<ResponseBase> Remove(int profileId, int resourceId, string roleId, string token)
     {
 
         // Cliente HTTP.
@@ -90,4 +90,4 @@ public static class ProfileRoles
 }
 
 // Registro auxiliar para las solicitudes de asignación de rol.
-public record AssignRoleRequest(int ProfileId, int ResourceId, int RoleId);
+public record AssignRoleRequest(int ProfileId, int ResourceId, string RoleId);
