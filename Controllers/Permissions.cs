@@ -1,3 +1,4 @@
+using LIN.Types.Cloud.Identity.Platform.Access;
 using LIN.Types.Developer.Models.Rbac;
 namespace LIN.Access.Developer.Controllers;
 
@@ -26,7 +27,7 @@ public static class Permissions
     }
 
 
-    public static async Task<ReadAllResponse<PermissionModel>> GetAll(string token, int resource)
+    public static async Task<ReadAllResponse<AccessGrant>> GetAll(string token, int resource)
     {
 
         // Cliente HTTP.
@@ -37,7 +38,7 @@ public static class Permissions
         client.AddParameter("resourceId", resource);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<PermissionModel>>();
+        var Content = await client.Get<ReadAllResponse<AccessGrant>>();
 
         // Retornar.
         return Content;
