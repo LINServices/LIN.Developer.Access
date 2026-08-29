@@ -1,8 +1,10 @@
-﻿namespace LIN.Access.Developer.Controllers;
+﻿using LIN.Types.Cloud.Identity.Platform.Abstracts;
+
+namespace LIN.Access.Developer.Controllers;
 
 public class Authentication
 {
-    public static async Task<ReadOneResponse<Types.Cloud.Identity.Abstracts.AuthModel<ProfileDataModel>>> Login(string cuenta, string password)
+    public static async Task<ReadOneResponse<AuthModel<ProfileDataModel>>> Login(string cuenta, string password)
     {
 
         // Cliente HTTP.
@@ -13,13 +15,13 @@ public class Authentication
         client.AddParameter("password", password);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<Types.Cloud.Identity.Abstracts.AuthModel<ProfileDataModel>>>();
+        var Content = await client.Get<ReadOneResponse<AuthModel<ProfileDataModel>>>();
 
         // Retornar.
         return Content;
     }
 
-    public static async Task<ReadOneResponse<Types.Cloud.Identity.Abstracts.AuthModel<ProfileDataModel>>> Login(string token)
+    public static async Task<ReadOneResponse<AuthModel<ProfileDataModel>>> Login(string token)
     {
 
         // Cliente HTTP.
@@ -29,7 +31,7 @@ public class Authentication
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<Types.Cloud.Identity.Abstracts.AuthModel<ProfileDataModel>>>();
+        var Content = await client.Get<ReadOneResponse<AuthModel<ProfileDataModel>>>();
 
         // Retornar.
         return Content;
