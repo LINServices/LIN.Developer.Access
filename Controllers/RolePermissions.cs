@@ -5,7 +5,7 @@ namespace LIN.Access.Developer.Controllers;
 public static class RolePermissions
 {
 
-   
+
     public static async Task<ReadOneResponse<bool>> Validate(string token, string permission, int resourceId)
     {
 
