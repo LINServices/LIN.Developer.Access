@@ -328,6 +328,24 @@ public static class Resources
         return Content;
     }
 
+    public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelationsForClient(int resource, string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient($"resources/validations/readprojectasociationsforclient/{resource}");
+
+        client.TimeOut = 40;
+
+        // Headers.
+        client.AddHeader("token", token );
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>();
+
+        // Retornar.
+        return Content;
+    }
+
     public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelationsMe(string cloud)
     {
 
