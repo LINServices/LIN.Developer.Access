@@ -69,6 +69,35 @@ public static class Profile
 
 
     /// <summary>
+    /// Actualizar las preferencias del perfil de la cuenta del token.
+    /// </summary>
+    /// <param name="token">Token de la cuenta.</param>
+    /// <param name="acceptUpdates">Aceptar recibir actualizaciones.</param>
+    /// <param name="sharePartners">Aceptar compartir con partners.</param>
+    /// <param name="termsAcceptedAt">Fecha de aceptación de términos.</param>
+    public static async Task<ResponseBase> UpdatePreferences(string token, bool acceptUpdates, bool sharePartners, DateTime? termsAcceptedAt)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("profiles/preferences");
+
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Put<ResponseBase>(new
+        {
+            AcceptUpdates = acceptUpdates,
+            SharePartners = sharePartners,
+            TermsAcceptedAt = termsAcceptedAt
+        });
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+    /// <summary>
     /// Buscar perfiles.
     /// </summary>
     /// <param name="token">Token de acceso.</param>
