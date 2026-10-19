@@ -98,6 +98,25 @@ public class Billings
     }
 
 
+    public static async Task<ResponseBase> Delete(int id, string token)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("billing");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("id", id);
+
+        // Resultado.
+        var Content = await client.Delete<ResponseBase>();
+
+        // Retornar.
+        return Content;
+
+    }
+
+
     public static async Task<ReadOneResponse<BillingAccount>> ReadBillingAccount(string token, int billing)
     {
 
