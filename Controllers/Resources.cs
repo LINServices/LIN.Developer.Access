@@ -340,7 +340,7 @@ public static class Resources
         client.TimeOut = 40;
 
         // Headers.
-        client.AddHeader("token", token );
+        client.AddHeader("token", token);
 
         // Resultado.
         var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>();
