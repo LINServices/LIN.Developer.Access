@@ -27,6 +27,24 @@ public static class RolePermissions
 
     }
 
+    public static async Task<ReadOneResponse<bool>> Validate(int identity, string permission, int resourceId)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient($"rbac/profiles/permissions/{resourceId}/validate");
+
+        // Parámetros.
+        client.AddParameter("permission", permission);
+        client.AddParameter("identity", identity);
+
+        // Resultado.
+        var Content = await client.Get<ReadOneResponse<bool>>();
+
+        // Retornar.
+        return Content;
+
+    }
+
 
 
     /// <summary>
