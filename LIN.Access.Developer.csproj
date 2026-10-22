@@ -7,11 +7,11 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>$(AssemblyName)</Title>
 		<Authors>LIN Platform</Authors>
-		<Version>2026.10.23</Version>
+		<Version>2026.10.24</Version>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Global.Http" Version="4.0.0" />
-		<PackageReference Include="LIN.Types.Cloud.Identity.Platform" Version="1.2.3" />
+		<PackageReference Include="LIN.Types.Cloud.Identity.Platform" Version="1.4.0" />
 		<PackageReference Include="LIN.Types.Developer" Version="4.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.13" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />

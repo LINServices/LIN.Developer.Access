@@ -1,3 +1,4 @@
+using LIN.Types.Cloud.Identity.Platform.Access;
 using LIN.Types.Developer.Models.Rbac;
 
 namespace LIN.Access.Developer.Controllers;
@@ -27,7 +28,7 @@ public static class RolePermissions
 
     }
 
-    public static async Task<ReadOneResponse<bool>> Validate(int identity, string permission, int resourceId)
+    public static async Task<ReadOneResponse<AccessCheckResult>> Validate(int identity, string permission, int resourceId)
     {
 
         // Cliente HTTP.
@@ -38,7 +39,7 @@ public static class RolePermissions
         client.AddParameter("identity", identity);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<bool>>();
+        var Content = await client.Get<ReadOneResponse<AccessCheckResult>>();
 
         // Retornar.
         return Content;
