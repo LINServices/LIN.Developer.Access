@@ -48,14 +48,14 @@ public sealed class Session
     /// <summary>
     /// Recarga o inicia una sesión
     /// </summary>
-    public static async Task<(Session? Sesion, Responses Response)> LoginWith(string user, string password)
+    public static async Task<(Session? Sesion, Responses Response)> LoginWith(string user, string password, CancellationToken cancellationToken = default)
     {
 
         // Cierra la sesión Actual
         CloseSession();
 
         // Validación de user
-        var response = await Controllers.Authentication.Login(user, password);
+        var response = await Controllers.Authentication.Login(user, password, cancellationToken);
 
 
         if (response.Response != Responses.Success)
@@ -76,14 +76,14 @@ public sealed class Session
     /// <summary>
     /// Recarga o inicia una sesión
     /// </summary>
-    public static async Task<(Session? Sesion, Responses Response)> LoginWith(string token)
+    public static async Task<(Session? Sesion, Responses Response)> LoginWith(string token, CancellationToken cancellationToken = default)
     {
 
         // Cierra la sesión Actual
         CloseSession();
 
         // Validación de user
-        var response = await Controllers.Authentication.Login(token);
+        var response = await Controllers.Authentication.Login(token, cancellationToken);
 
 
         if (response.Response != Responses.Success)

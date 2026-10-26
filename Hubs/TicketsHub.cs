@@ -54,40 +54,40 @@ public class TicketsHubClient
         };
     }
 
-    public async Task ConnectAsync()
+    public async Task ConnectAsync(CancellationToken cancellationToken = default)
     {
         if (_connection.State == HubConnectionState.Connected)
             return;
 
-        await _connection.StartAsync();
+        await _connection.StartAsync(cancellationToken);
         OnConnected?.Invoke();
     }
 
-    public async Task DisconnectAsync()
+    public async Task DisconnectAsync(CancellationToken cancellationToken = default)
     {
         if (_connection.State != HubConnectionState.Connected)
             return;
 
-        await _connection.StopAsync();
+        await _connection.StopAsync(cancellationToken);
     }
 
-    public async Task<SubscribeResponse?> SubscribeAsync(string ticketId)
+    public async Task<SubscribeResponse?> SubscribeAsync(string ticketId, CancellationToken cancellationToken = default)
     {
-        await EnsureConnected();
-        return await _connection.InvokeAsync<SubscribeResponse>("Subscribe", ticketId);
+        await EnsureConnected(cancellationToken);
+        return await _connection.InvokeAsync<SubscribeResponse>("Subscribe", ticketId, cancellationToken);
     }
 
-    public async Task UnsubscribeAsync(string ticketId)
+    public async Task UnsubscribeAsync(string ticketId, CancellationToken cancellationToken = default)
     {
-        await EnsureConnected();
-        await _connection.InvokeAsync("Unsubscribe", ticketId);
+        await EnsureConnected(cancellationToken);
+        await _connection.InvokeAsync("Unsubscribe", ticketId, cancellationToken);
     }
 
-    private async Task EnsureConnected()
+    private async Task EnsureConnected(CancellationToken cancellationToken = default)
     {
         if (_connection.State != HubConnectionState.Connected)
         {
-            await _connection.StartAsync();
+            await _connection.StartAsync(cancellationToken);
         }
     }
 }

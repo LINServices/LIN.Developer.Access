@@ -8,7 +8,8 @@ public static class FirewallRules
     /// </summary>
     /// <param name="modelo">Modelo de la regla</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(FirewallRuleModel modelo, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<CreateResponse> Create(FirewallRuleModel modelo, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -18,7 +19,7 @@ public static class FirewallRules
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Post<CreateResponse>(modelo);
+        var Content = await client.Post<CreateResponse>(modelo, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -31,7 +32,8 @@ public static class FirewallRules
     /// </summary>
     /// <param name="id">ID del proyecto</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<FirewallRuleModel>> ReadAllAsync(int id, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadAllResponse<FirewallRuleModel>> ReadAllAsync(int id, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -44,7 +46,7 @@ public static class FirewallRules
         client.AddParameter("id", id);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<FirewallRuleModel>>();
+        var Content = await client.Get<ReadAllResponse<FirewallRuleModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -57,7 +59,8 @@ public static class FirewallRules
     /// </summary>
     /// <param name="id">ID de la regla</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ResponseBase> Delete(int id, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> Delete(int id, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -70,7 +73,7 @@ public static class FirewallRules
         client.AddParameter("id", id);
 
         // Resultado.
-        var Content = await client.Delete<ResponseBase>();
+        var Content = await client.Delete<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

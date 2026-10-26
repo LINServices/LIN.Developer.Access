@@ -7,7 +7,7 @@ namespace LIN.Access.Developer.Controllers;
 public static class Tickets
 {
 
-    public static async Task<CreateResponse> Create(TicketMongoModel modelo, string token)
+    public static async Task<CreateResponse> Create(TicketMongoModel modelo, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -17,7 +17,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Post<CreateResponse>(modelo);
+        var Content = await client.Post<CreateResponse>(modelo, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -25,7 +25,7 @@ public static class Tickets
     }
 
 
-    public static async Task<ReadAllResponse<TicketDetailDto>> ReadAll(string token)
+    public static async Task<ReadAllResponse<TicketDetailDto>> ReadAll(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -35,7 +35,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<TicketDetailDto>>();
+        var Content = await client.Get<ReadAllResponse<TicketDetailDto>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -43,7 +43,7 @@ public static class Tickets
     }
 
 
-    public static async Task<ResponseBase> Asociate(string token, string ticket, int profile)
+    public static async Task<ResponseBase> Asociate(string token, string ticket, int profile, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -55,7 +55,7 @@ public static class Tickets
         client.AddParameter("profile", profile);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>();
+        var Content = await client.Post<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -65,7 +65,7 @@ public static class Tickets
 
 
 
-    public static async Task<ReadAllResponse<TicketDetailDto>> ReadAllAll(string token)
+    public static async Task<ReadAllResponse<TicketDetailDto>> ReadAllAll(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -75,7 +75,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<TicketDetailDto>>();
+        var Content = await client.Get<ReadAllResponse<TicketDetailDto>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -84,7 +84,7 @@ public static class Tickets
 
 
 
-    public static async Task<ReadAllResponse<TicketDetailDto>> ReadAllForAgents(string token)
+    public static async Task<ReadAllResponse<TicketDetailDto>> ReadAllForAgents(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -94,7 +94,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<TicketDetailDto>>();
+        var Content = await client.Get<ReadAllResponse<TicketDetailDto>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -102,7 +102,7 @@ public static class Tickets
     }
 
 
-    public static async Task<ResponseBase> Close(string id, string token)
+    public static async Task<ResponseBase> Close(string id, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -113,7 +113,7 @@ public static class Tickets
         client.AddParameter("id", id);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>();
+        var Content = await client.Post<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -121,7 +121,7 @@ public static class Tickets
     }
 
 
-    public static async Task<ReadOneResponse<TicketDetailDto>> ReadOne(string id, string token)
+    public static async Task<ReadOneResponse<TicketDetailDto>> ReadOne(string id, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -131,7 +131,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<TicketDetailDto>>();
+        var Content = await client.Get<ReadOneResponse<TicketDetailDto>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -140,7 +140,7 @@ public static class Tickets
 
 
 
-    public static async Task<ReadOneResponse<AgentMongoModel>> ReadAgent(string token)
+    public static async Task<ReadOneResponse<AgentMongoModel>> ReadAgent(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -150,7 +150,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<AgentMongoModel>>();
+        var Content = await client.Get<ReadOneResponse<AgentMongoModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -159,7 +159,7 @@ public static class Tickets
 
 
 
-    public static async Task<ResponseBase> PostEvent(string ticket, AddTicketEventRequest evento, string token)
+    public static async Task<ResponseBase> PostEvent(string ticket, AddTicketEventRequest evento, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -169,7 +169,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>(evento);
+        var Content = await client.Post<ResponseBase>(evento, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -177,7 +177,7 @@ public static class Tickets
     }
 
 
-    public static async Task<ReadAllResponse<TicketEvent>> GetEvents(string ticket, string token)
+    public static async Task<ReadAllResponse<TicketEvent>> GetEvents(string ticket, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -187,7 +187,7 @@ public static class Tickets
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<TicketEvent>>();
+        var Content = await client.Get<ReadAllResponse<TicketEvent>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

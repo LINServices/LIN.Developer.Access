@@ -8,7 +8,8 @@ public class Security
     /// </summary>
     /// <param name="id">Id del perfil.</param>
     /// <param name="otp">Código.</param>
-    public static async Task<ResponseBase> ValidateOTP(int id, string otp)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> ValidateOTP(int id, string otp, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -19,7 +20,7 @@ public class Security
         client.AddParameter("otp", otp);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>();
+        var Content = await client.Post<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -32,7 +33,8 @@ public class Security
     /// </summary>
     /// <param name="id">Id del perfil.</param>
     /// <param name="mail">Nuevo email.</param>
-    public static async Task<ResponseBase> ReplaceProfileMail(int id, string mail)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> ReplaceProfileMail(int id, string mail, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -43,7 +45,7 @@ public class Security
         client.AddParameter("newEmail", mail);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>();
+        var Content = await client.Post<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

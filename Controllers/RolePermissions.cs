@@ -7,7 +7,7 @@ public static class RolePermissions
 {
 
 
-    public static async Task<ReadOneResponse<bool>> Validate(string token, string permission, int resourceId)
+    public static async Task<ReadOneResponse<bool>> Validate(string token, string permission, int resourceId, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -21,14 +21,14 @@ public static class RolePermissions
         client.AddParameter("resourceId", resourceId.ToString());
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<bool>>();
+        var Content = await client.Get<ReadOneResponse<bool>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
 
     }
 
-    public static async Task<ReadOneResponse<AccessCheckResult>> Validate(int identity, string permission, int resourceId)
+    public static async Task<ReadOneResponse<AccessCheckResult>> Validate(int identity, string permission, int resourceId, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -39,7 +39,7 @@ public static class RolePermissions
         client.AddParameter("identity", identity);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<AccessCheckResult>>();
+        var Content = await client.Get<ReadOneResponse<AccessCheckResult>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -54,7 +54,8 @@ public static class RolePermissions
     /// <param name="token">Token de acceso</param>
     /// <param name="roleId">ID del rol</param>
     /// <param name="resourceId">ID del recurso</param>
-    public static async Task<ReadAllResponse<PermissionModel>> GetByRole(string token, string roleId, int resourceId)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadAllResponse<PermissionModel>> GetByRole(string token, string roleId, int resourceId, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -68,7 +69,7 @@ public static class RolePermissions
         client.AddParameter("resourceId", resourceId.ToString());
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<PermissionModel>>();
+        var Content = await client.Get<ReadAllResponse<PermissionModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -83,7 +84,8 @@ public static class RolePermissions
     /// <param name="roleId">ID del rol</param>
     /// <param name="permissionId">ID del permiso</param>
     /// <param name="resourceId">ID del recurso</param>
-    public static async Task<ResponseBase> AddPermission(string token, string roleId, int permissionId, int resourceId)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> AddPermission(string token, string roleId, int permissionId, int resourceId, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -98,7 +100,7 @@ public static class RolePermissions
             RoleId = roleId,
             PermissionId = permissionId,
             ResourceId = resourceId
-        });
+        }, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -113,7 +115,8 @@ public static class RolePermissions
     /// <param name="roleId">ID del rol</param>
     /// <param name="permissionId">ID del permiso</param>
     /// <param name="resourceId">ID del recurso</param>
-    public static async Task<ResponseBase> RemovePermission(string token, string roleId, int permissionId, int resourceId)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> RemovePermission(string token, string roleId, int permissionId, int resourceId, CancellationToken cancellationToken = default)
     {
         // Cliente HTTP.
         Client client = Service.GetClient("rbac/roles/permissions");
@@ -127,7 +130,7 @@ public static class RolePermissions
         client.AddParameter("resourceId", resourceId.ToString());
 
         // Resultado.
-        var Content = await client.Delete<ResponseBase>();
+        var Content = await client.Delete<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

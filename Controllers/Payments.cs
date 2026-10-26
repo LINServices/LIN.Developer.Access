@@ -2,7 +2,7 @@
 
 public class Payments
 {
-    public static async Task<ReadAllResponse<TransactionDataModel>> ReadAll(int resource, string token)
+    public static async Task<ReadAllResponse<TransactionDataModel>> ReadAll(int resource, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -13,13 +13,13 @@ public class Payments
         client.AddHeader("resource", resource);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<TransactionDataModel>>();
+        var Content = await client.Get<ReadAllResponse<TransactionDataModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
-    public static async Task<ReadAllResponse<TransactionDataModel>> ReadAllByBilling(int billingAccount, string token)
+    public static async Task<ReadAllResponse<TransactionDataModel>> ReadAllByBilling(int billingAccount, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -30,7 +30,7 @@ public class Payments
         client.AddHeader("billingAccount", billingAccount);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<TransactionDataModel>>();
+        var Content = await client.Get<ReadAllResponse<TransactionDataModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

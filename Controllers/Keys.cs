@@ -8,7 +8,8 @@ public static class Keys
     /// </summary>
     /// <param name="modelo">Modelo</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(KeyModel modelo, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<CreateResponse> Create(KeyModel modelo, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -18,7 +19,7 @@ public static class Keys
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Post<CreateResponse>(modelo);
+        var Content = await client.Post<CreateResponse>(modelo, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -31,7 +32,8 @@ public static class Keys
     /// </summary>
     /// <param name="id">ID del recurso.</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<KeyModel>> ReadAll(int id, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadAllResponse<KeyModel>> ReadAll(int id, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -44,7 +46,7 @@ public static class Keys
         client.AddParameter("id", id);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<KeyModel>>();
+        var Content = await client.Get<ReadAllResponse<KeyModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -58,7 +60,8 @@ public static class Keys
     /// <param name="id">ID de la llave</param>
     /// <param name="estado">Nuevo estado</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ResponseBase> ChangeState(int id, ApiKeyStatus estado, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> ChangeState(int id, ApiKeyStatus estado, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -72,7 +75,7 @@ public static class Keys
         client.AddParameter("estado", (int)estado);
 
         // Resultado.
-        var Content = await client.Patch<ResponseBase>();
+        var Content = await client.Patch<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

@@ -9,7 +9,8 @@ public static class Permissions
     /// Obtiene el catálogo completo de permisos de la plataforma.
     /// </summary>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<PermissionModel>> GetAll(string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadAllResponse<PermissionModel>> GetAll(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -19,7 +20,7 @@ public static class Permissions
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<PermissionModel>>();
+        var Content = await client.Get<ReadAllResponse<PermissionModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -27,7 +28,7 @@ public static class Permissions
     }
 
 
-    public static async Task<ReadAllResponse<AccessGrant>> GetAll(string token, int resource)
+    public static async Task<ReadAllResponse<AccessGrant>> GetAll(string token, int resource, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -38,7 +39,7 @@ public static class Permissions
         client.AddParameter("resourceId", resource);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<AccessGrant>>();
+        var Content = await client.Get<ReadAllResponse<AccessGrant>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

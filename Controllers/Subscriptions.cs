@@ -8,7 +8,8 @@ public class Subscriptions
     /// </summary>
     /// <param name="key">Llave de un recurso.</param>
     /// <param name="amount">Valor total.</param>
-    public static async Task<ReadOneResponse<TransactionResultModel>> Create(string key, decimal amount)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadOneResponse<TransactionResultModel>> Create(string key, decimal amount, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -21,7 +22,7 @@ public class Subscriptions
         client.AddParameter("amount", amount.ToString());
 
         // Resultado.
-        var Content = await client.Post<ReadOneResponse<TransactionResultModel>>();
+        var Content = await client.Post<ReadOneResponse<TransactionResultModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -33,7 +34,8 @@ public class Subscriptions
     /// </summary>
     /// <param name="cloud">Token de acceso cloud.</param>
     /// <param name="amount">Valor total.</param>
-    public static async Task<ReadOneResponse<TransactionResultModel>> CreateSubscriptionCloud(string cloud, decimal amount)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadOneResponse<TransactionResultModel>> CreateSubscriptionCloud(string cloud, decimal amount, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -46,7 +48,7 @@ public class Subscriptions
         client.AddParameter("amount", amount.ToString());
 
         // Resultado.
-        var Content = await client.Post<ReadOneResponse<TransactionResultModel>>();
+        var Content = await client.Post<ReadOneResponse<TransactionResultModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

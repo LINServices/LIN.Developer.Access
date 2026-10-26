@@ -2,7 +2,7 @@
 
 public static class Notifications
 {
-    public static async Task<ReadAllResponse<NotificationModel>> ReadAllAsync(string token)
+    public static async Task<ReadAllResponse<NotificationModel>> ReadAllAsync(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -12,13 +12,13 @@ public static class Notifications
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<NotificationModel>>();
+        var Content = await client.Get<ReadAllResponse<NotificationModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
 
     }
-    public static async Task<ResponseBase> MarkRead(string token)
+    public static async Task<ResponseBase> MarkRead(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -28,7 +28,7 @@ public static class Notifications
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Put<ResponseBase>();
+        var Content = await client.Put<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

@@ -5,7 +5,7 @@ namespace LIN.Access.Developer.Controllers;
 
 public class Invoices
 {
-    public static async Task<ReadAllResponse<InvoiceDto>> ReadAll(string token, int billingAccount)
+    public static async Task<ReadAllResponse<InvoiceDto>> ReadAll(string token, int billingAccount, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -16,13 +16,13 @@ public class Invoices
         client.AddParameter("billing", billingAccount);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<InvoiceDto>>();
+        var Content = await client.Get<ReadAllResponse<InvoiceDto>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
-    public static async Task<ReadOneResponse<InvoiceDto>> Read(string token, int invoice)
+    public static async Task<ReadOneResponse<InvoiceDto>> Read(string token, int invoice, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -32,13 +32,13 @@ public class Invoices
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<InvoiceDto>>();
+        var Content = await client.Get<ReadOneResponse<InvoiceDto>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
-    public static async Task<ReadOneResponse<SubscriptionModel>> Subscription(string token, int resourceId)
+    public static async Task<ReadOneResponse<SubscriptionModel>> Subscription(string token, int resourceId, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -49,7 +49,7 @@ public class Invoices
         client.AddParameter("resourceId", resourceId);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<SubscriptionModel>>();
+        var Content = await client.Get<ReadOneResponse<SubscriptionModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

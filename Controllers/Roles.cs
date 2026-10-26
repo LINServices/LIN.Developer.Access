@@ -10,7 +10,8 @@ public static class Roles
     /// </summary>
     /// <param name="token">Token de acceso</param>
     /// <param name="resourceId">ID del recurso</param>
-    public static async Task<ReadAllResponse<RoleModel>> GetAll(string token, int resourceId)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadAllResponse<RoleModel>> GetAll(string token, int resourceId, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -23,7 +24,7 @@ public static class Roles
         client.AddParameter("resourceId", resourceId.ToString());
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<RoleModel>>();
+        var Content = await client.Get<ReadAllResponse<RoleModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -36,7 +37,8 @@ public static class Roles
     /// </summary>
     /// <param name="token">Token de acceso</param>
     /// <param name="model">Modelo del rol</param>
-    public static async Task<CreateResponse> Create(string token, RoleModel model)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<CreateResponse> Create(string token, RoleModel model, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -46,7 +48,7 @@ public static class Roles
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Post<CreateResponse>(model);
+        var Content = await client.Post<CreateResponse>(model, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

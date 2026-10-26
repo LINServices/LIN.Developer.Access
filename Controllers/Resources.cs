@@ -10,7 +10,8 @@ public static class Resources
     /// </summary>
     /// <param name="modelo">Modelo del recurso</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token, Dictionary<string, object> adicional)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<CreateResponse> Create(ProjectDataModel modelo, string token, Dictionary<string, object> adicional, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -26,7 +27,7 @@ public static class Resources
             client.AddParameter(item.Key, item.Value.ToString());
 
         // Resultado.
-        var Content = await client.Post<CreateResponse>(modelo);
+        var Content = await client.Post<CreateResponse>(modelo, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -38,7 +39,8 @@ public static class Resources
     /// Obtiene los recursos asociados a un perfil.
     /// </summary>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token, int? baseResource = null)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token, int? baseResource = null, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -53,14 +55,14 @@ public static class Resources
         }
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
 
     }
 
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllBases(string token)
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllBases(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -70,7 +72,7 @@ public static class Resources
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -78,7 +80,7 @@ public static class Resources
     }
 
 
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllPlans(string token)
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllPlans(string token, CancellationToken cancellationToken = default)
     {
         // Cliente HTTP.
         Client client = Service.GetClient("resources/plans/all");
@@ -87,14 +89,14 @@ public static class Resources
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
 
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllConfigurations(string token)
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllConfigurations(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -103,7 +105,7 @@ public static class Resources
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -111,7 +113,7 @@ public static class Resources
     }
 
 
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllVectors(string token)
+    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllVectors(string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -120,7 +122,7 @@ public static class Resources
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>();
+        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -128,7 +130,7 @@ public static class Resources
     }
 
 
-    public static async Task<ResponseBase> Asociate(string token, int resource, int? group)
+    public static async Task<ResponseBase> Asociate(string token, int resource, int? group, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -142,13 +144,13 @@ public static class Resources
             client.AddParameter("group", group.Value);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>();
+        var Content = await client.Post<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
-    public static async Task<ResponseBase> AsociateToConfiguration(string token, int resource, int configuration)
+    public static async Task<ResponseBase> AsociateToConfiguration(string token, int resource, int configuration, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -160,14 +162,14 @@ public static class Resources
         client.AddParameter("configurationResource", configuration);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>();
+        var Content = await client.Post<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
 
-    public static async Task<ResponseBase> AsociateToRag(string token, int resource, int vector)
+    public static async Task<ResponseBase> AsociateToRag(string token, int resource, int vector, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -179,7 +181,7 @@ public static class Resources
         client.AddParameter("vectorResource", vector);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>();
+        var Content = await client.Post<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -192,7 +194,8 @@ public static class Resources
     /// </summary>
     /// <param name="id">ID del recurso.</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOne(int id, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOne(int id, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -226,14 +229,14 @@ public static class Resources
         };
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type");
+        var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type", cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
 
     }
 
-    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOneByKey(string key)
+    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOneByKey(string key, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -266,14 +269,14 @@ public static class Resources
         };
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type");
+        var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type", cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
 
-    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOneByCloud(string cloud)
+    public static async Task<ReadOneResponse<ProjectDataModel>> ReadOneByCloud(string cloud, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -306,14 +309,14 @@ public static class Resources
         };
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type");
+        var Content = await client.Get<ReadOneResponse<ProjectDataModel>, ProjectDataModel>(types, "Type", cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
 
-    public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelations(string cloud)
+    public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelations(string cloud, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -325,13 +328,13 @@ public static class Resources
         client.AddHeader("cloud", cloud);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>();
+        var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
-    public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelationsForClient(int resource, string token)
+    public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelationsForClient(int resource, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -343,13 +346,13 @@ public static class Resources
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>();
+        var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
-    public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelationsMe(string cloud)
+    public static async Task<ReadAllResponse<ResourceRelationModel>> ReadRelationsMe(string cloud, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -361,7 +364,7 @@ public static class Resources
         client.AddHeader("cloud", cloud);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>();
+        var Content = await client.Get<ReadAllResponse<ResourceRelationModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -373,7 +376,8 @@ public static class Resources
     /// </summary>
     /// <param name="id">ID del recurso.</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<ResponseBase> Delete(int id, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> Delete(int id, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -386,7 +390,7 @@ public static class Resources
         client.AddParameter("id", id);
 
         // Resultado.
-        var Content = await client.Delete<ResponseBase>();
+        var Content = await client.Delete<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -398,7 +402,8 @@ public static class Resources
     /// </summary>
     /// <param name="key">Llave de acceso.</param>
     /// <param name="ip">Ip de acceso.</param>
-    public static async Task<ReadOneResponse<int>> Validate(string key, string ip)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadOneResponse<int>> Validate(string key, string ip, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -411,7 +416,7 @@ public static class Resources
         client.AddParameter("ip", ip);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<int>>();
+        var Content = await client.Get<ReadOneResponse<int>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -424,7 +429,8 @@ public static class Resources
     /// <param name="token">Token de acceso.</param>
     /// <param name="resource">id del recurso.</param>
     /// <returns></returns>
-    public static async Task<ReadOneResponse<bool>> Validate(string token, int resource)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadOneResponse<bool>> Validate(string token, int resource, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -437,14 +443,14 @@ public static class Resources
         client.AddParameter("resource", resource);
 
         // Resultado.
-        var Content = await client.Get<ReadOneResponse<bool>>();
+        var Content = await client.Get<ReadOneResponse<bool>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
     }
 
 
-    public static async Task<ResponseBase> UpdateName(string token, int resource, string name)
+    public static async Task<ResponseBase> UpdateName(string token, int resource, string name, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -458,7 +464,7 @@ public static class Resources
         client.AddParameter("name", name);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>();
+        var Content = await client.Post<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -471,7 +477,8 @@ public static class Resources
     /// <param name="token">Token de acceso.</param>
     /// <param name="type">Tipo del recurso.</param>
     /// <param name="adicional">Propiedades adicionales.</param>
-    public static async Task<ReadAllResponse<PricingModel>> Pricings(string token, string type, Dictionary<string, object> adicional)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadAllResponse<PricingModel>> Pricings(string token, string type, Dictionary<string, object> adicional, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -486,7 +493,7 @@ public static class Resources
             client.AddParameter(item.Key, item.Value.ToString());
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<PricingModel>>();
+        var Content = await client.Get<ReadAllResponse<PricingModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -497,7 +504,8 @@ public static class Resources
     /// Confirma el acceso a un recurso.
     /// </summary>
     /// <param name="cloud">Token de acceso cloud.</param>
-    public static async Task<ResponseBase> Confirm(string cloud)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> Confirm(string cloud, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -507,7 +515,7 @@ public static class Resources
         client.AddHeader("cloud", cloud);
 
         // Resultado.
-        var Content = await client.Patch<ResponseBase>();
+        var Content = await client.Patch<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -520,7 +528,8 @@ public static class Resources
     /// </summary>
     /// <param name="modelo">Modelo del recurso</param>
     /// <param name="token">Token de acceso</param>
-    public static async Task<CreateResponse> Share(InviteUserDto userDto, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<CreateResponse> Share(InviteUserDto userDto, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -532,7 +541,7 @@ public static class Resources
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Post<CreateResponse>(userDto);
+        var Content = await client.Post<CreateResponse>(userDto, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -540,7 +549,7 @@ public static class Resources
     }
 
 
-    public static async Task<ResponseBase> Update(InviteUserDto userDto, string token)
+    public static async Task<ResponseBase> Update(InviteUserDto userDto, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -552,7 +561,7 @@ public static class Resources
         client.AddHeader("token", token);
 
         // Resultado.
-        var Content = await client.Patch<ResponseBase>(userDto);
+        var Content = await client.Patch<ResponseBase>(userDto, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -560,7 +569,7 @@ public static class Resources
     }
 
 
-    public static async Task<ResponseBase> DeleteMember(InviteUserDto userDto, string token)
+    public static async Task<ResponseBase> DeleteMember(InviteUserDto userDto, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -574,7 +583,7 @@ public static class Resources
         client.AddParameter("resource", userDto.ResourceId);
 
         // Resultado.
-        var Content = await client.Delete<ResponseBase>();
+        var Content = await client.Delete<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -582,7 +591,7 @@ public static class Resources
     }
 
 
-    public static async Task<ReadAllResponse<OwnerModel>> ReadMembers(int resource, string token)
+    public static async Task<ReadAllResponse<OwnerModel>> ReadMembers(int resource, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -595,7 +604,7 @@ public static class Resources
         client.AddHeader("resource", resource);
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<OwnerModel>>();
+        var Content = await client.Get<ReadAllResponse<OwnerModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

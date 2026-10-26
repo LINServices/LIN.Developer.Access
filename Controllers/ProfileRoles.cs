@@ -10,7 +10,8 @@ public static class ProfileRoles
     /// <param name="profileId">Id del perfil.</param>
     /// <param name="resourceId">Id del recurso.</param>
     /// <param name="token">Token de acceso.</param>
-    public static async Task<ReadAllResponse<RoleModel>> GetAll(int profileId, int resourceId, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ReadAllResponse<RoleModel>> GetAll(int profileId, int resourceId, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -24,7 +25,7 @@ public static class ProfileRoles
         client.AddParameter("resourceId", resourceId.ToString());
 
         // Resultado.
-        var Content = await client.Get<ReadAllResponse<RoleModel>>();
+        var Content = await client.Get<ReadAllResponse<RoleModel>>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -38,7 +39,8 @@ public static class ProfileRoles
     /// <param name="resourceId">Id del recurso.</param>
     /// <param name="roleId">Id del rol.</param>
     /// <param name="token">Token de acceso.</param>
-    public static async Task<ResponseBase> Add(int profileId, int resourceId, string roleId, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> Add(int profileId, int resourceId, string roleId, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -51,7 +53,7 @@ public static class ProfileRoles
         var model = new AssignRoleRequest(profileId, resourceId, roleId);
 
         // Resultado.
-        var Content = await client.Post<ResponseBase>(model);
+        var Content = await client.Post<ResponseBase>(model, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
@@ -65,7 +67,8 @@ public static class ProfileRoles
     /// <param name="resourceId">Id del recurso.</param>
     /// <param name="roleId">Id del rol.</param>
     /// <param name="token">Token de acceso.</param>
-    public static async Task<ResponseBase> Remove(int profileId, int resourceId, string roleId, string token)
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> Remove(int profileId, int resourceId, string roleId, string token, CancellationToken cancellationToken = default)
     {
 
         // Cliente HTTP.
@@ -80,7 +83,7 @@ public static class ProfileRoles
         client.AddParameter("roleId", roleId.ToString());
 
         // Resultado.
-        var Content = await client.Delete<ResponseBase>();
+        var Content = await client.Delete<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

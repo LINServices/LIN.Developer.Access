@@ -107,14 +107,14 @@ public class SessionHub
         };
     }
 
-    public async Task ConnectAsync()
+    public async Task ConnectAsync(CancellationToken cancellationToken = default)
     {
         try
         {
             if (_connection.State == HubConnectionState.Connected)
                 return;
 
-            await _connection.StartAsync();
+            await _connection.StartAsync(cancellationToken);
 
             try
             {
@@ -125,30 +125,30 @@ public class SessionHub
                 HandleError(ex);
             }
 
-            await SubscribeAsync();
+            await SubscribeAsync(cancellationToken);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             HandleError(ex);
         }
     }
 
-    public async Task DisconnectAsync()
+    public async Task DisconnectAsync(CancellationToken cancellationToken = default)
     {
         try
         {
             if (_connection.State != HubConnectionState.Connected)
                 return;
 
-            await _connection.StopAsync();
+            await _connection.StopAsync(cancellationToken);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             HandleError(ex);
         }
     }
 
-    public async Task ReconnectAsync()
+    public async Task ReconnectAsync(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -161,7 +161,7 @@ public class SessionHub
                 _connection.State == HubConnectionState.Reconnecting)
                 return;
 
-            await _connection.StartAsync();
+            await _connection.StartAsync(cancellationToken);
 
             try
             {
@@ -172,37 +172,37 @@ public class SessionHub
                 HandleError(ex);
             }
 
-            await SubscribeAsync();
+            await SubscribeAsync(cancellationToken);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             HandleError(ex);
         }
     }
 
-    public async Task SubscribeAsync()
+    public async Task SubscribeAsync(CancellationToken cancellationToken = default)
     {
         try
         {
-            await EnsureConnected();
-            await _connection.InvokeAsync("Subscribe");
+            await EnsureConnected(cancellationToken);
+            await _connection.InvokeAsync("Subscribe", cancellationToken);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             HandleError(ex);
         }
     }
 
-    private async Task EnsureConnected()
+    private async Task EnsureConnected(CancellationToken cancellationToken = default)
     {
         try
         {
             if (_connection.State != HubConnectionState.Connected)
             {
-                await _connection.StartAsync();
+                await _connection.StartAsync(cancellationToken);
             }
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             HandleError(ex);
         }
