@@ -54,6 +54,30 @@ public class BillingPlans
     }
 
     /// <summary>
+    /// Indica si el perfil del token es administrador de la plataforma.desde 
+    /// </summary>
+    public static async Task<ReadOneResponse<bool>> IsAdmin(string token, CancellationToken cancellationToken = default)
+    {
+        Client client = Service.GetClient("billing/admin/me");
+
+        client.AddHeader("token", token);
+
+        return await client.Get<ReadOneResponse<bool>>(cancellationToken: cancellationToken);
+    }
+
+    /// <summary>
+    /// Cuentas Professional/Enterprise con su nivel de confianza (solo administradores).
+    /// </summary>
+    public static async Task<ReadAllResponse<AdminAccountDto>> ReadAccounts(string token, CancellationToken cancellationToken = default)
+    {
+        Client client = Service.GetClient("billing/admin/accounts");
+
+        client.AddHeader("token", token);
+
+        return await client.Get<ReadAllResponse<AdminAccountDto>>(cancellationToken: cancellationToken);
+    }
+
+    /// <summary>
     /// Aprobar una cuenta Enterprise (solo administradores).
     /// </summary>
     public static async Task<ResponseBase> Approve(string token, int accountId, CancellationToken cancellationToken = default)
@@ -76,6 +100,33 @@ public class BillingPlans
         client.AddHeader("token", token);
         client.AddParameter("accountId", accountId);
         client.AddParameter("reason", reason);
+
+        return await client.Patch<ResponseBase>(cancellationToken: cancellationToken);
+    }
+
+    /// <summary>
+    /// Cambiar el tipo de cuenta (plan) de una cuenta de facturación (solo administradores).
+    /// </summary>
+    public static async Task<ResponseBase> SetPlan(string token, int accountId, BillingPlan plan, CancellationToken cancellationToken = default)
+    {
+        Client client = Service.GetClient("billing/admin/plan");
+
+        client.AddHeader("token", token);
+        client.AddParameter("accountId", accountId);
+        client.AddParameter("plan", (int)plan);
+
+        return await client.Patch<ResponseBase>(cancellationToken: cancellationToken);
+    }
+
+    /// <summary>
+    /// Reintentar la reactivación de una cuenta desactivada (solo administradores).
+    /// </summary>
+    public static async Task<ResponseBase> Reactivate(string token, int accountId, CancellationToken cancellationToken = default)
+    {
+        Client client = Service.GetClient("billing/admin/reactivate");
+
+        client.AddHeader("token", token);
+        client.AddParameter("accountId", accountId);
 
         return await client.Patch<ResponseBase>(cancellationToken: cancellationToken);
     }

@@ -28,6 +28,28 @@ public class PendingEnterpriseDto
     public string OwnerAlias { get; set; } = string.Empty;
 }
 
+/// <summary>
+/// Cuenta Professional/Enterprise con su nivel de confianza (vista de administración).
+/// </summary>
+public class AdminAccountDto
+{
+    public int AccountId { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public BillingPlan Plan { get; set; }
+    public BillingAccountStatus State { get; set; }
+    public decimal Balance { get; set; }
+
+    /// <summary>
+    /// Nivel calculado automáticamente.
+    /// </summary>
+    public int TrustLevel { get; set; }
+
+    /// <summary>
+    /// Nivel fijado manualmente (null si no hay ajuste).
+    /// </summary>
+    public int? TrustLevelOverride { get; set; }
+}
+
 internal class EnterpriseRequestModel
 {
     public string Name { get; set; } = string.Empty;
