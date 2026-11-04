@@ -54,3 +54,43 @@ internal class EnterpriseRequestModel
 {
     public string Name { get; set; } = string.Empty;
 }
+
+/// <summary>
+/// Solicitud para aplicar un descuento a una factura (POST admin/invoices/{id}/discounts).
+/// </summary>
+public class AddDiscountRequest
+{
+    public string Name { get; set; } = string.Empty;
+    public LIN.Types.Developer.BillingModels.DiscountType Type { get; set; }
+    public decimal Value { get; set; }
+
+    /// <summary>
+    /// Orden de aplicación; null = al final.
+    /// </summary>
+    public int? Order { get; set; }
+
+    /// <summary>
+    /// Motivo (obligatorio, queda auditado).
+    /// </summary>
+    public string Reason { get; set; } = string.Empty;
+}
+
+/// <summary>
+/// Ajuste manual de una factura (POST admin/invoices/{id}/items). Monto negativo = crédito.
+/// </summary>
+public class AddInvoiceItemRequest
+{
+    public string Description { get; set; } = string.Empty;
+    public decimal Amount { get; set; }
+    public string Reason { get; set; } = string.Empty;
+}
+
+/// <summary>
+/// Resumen administrativo de las facturas de una cuenta.
+/// </summary>
+public class InvoiceSummaryDto
+{
+    public int BillingAccountId { get; set; }
+    public decimal UnpaidTotal { get; set; }
+    public bool HasOverdue { get; set; }
+}
