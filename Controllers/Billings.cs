@@ -60,24 +60,6 @@ public class Billings
         return Content;
     }
 
-    public static async Task<ReadAllResponse<TransactionDataModel>> ReadAll(string token, CancellationToken cancellationToken = default)
-    {
-
-        // Cliente HTTP.
-        Client client = Service.GetClient("billing/all");
-
-        // Headers.
-        client.AddHeader("token", token);
-
-        // Resultado.
-        var Content = await client.Get<ReadAllResponse<TransactionDataModel>>(cancellationToken: cancellationToken);
-
-        // Retornar.
-        return Content;
-
-    }
-
-
     public static async Task<CreateResponse> Create(string name, BillingAccountTypes types, string token, CancellationToken cancellationToken = default)
     {
 
@@ -110,6 +92,26 @@ public class Billings
 
         // Resultado.
         var Content = await client.Delete<ResponseBase>(cancellationToken: cancellationToken);
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+    public static async Task<ResponseBase> UpdateName(int id, string name, string token, CancellationToken cancellationToken = default)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("billing/name");
+
+        // Headers.
+        client.AddHeader("token", token);
+        client.AddParameter("id", id);
+        client.AddParameter("name", name);
+
+        // Resultado.
+        var Content = await client.Patch<ResponseBase>(cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;

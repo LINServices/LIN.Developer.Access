@@ -159,6 +159,47 @@ public static class Tickets
 
 
 
+    public static async Task<CreateResponse> CreateAgent(AgentMongoModel modelo, string token, CancellationToken cancellationToken = default)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient($"agents");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Post<CreateResponse>(modelo, cancellationToken: cancellationToken);
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+
+    public static async Task<ReadOneResponse<AgentMongoModel>> ReadAgentByAlias(string alias, string token, CancellationToken cancellationToken = default)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient($"agents/alias");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Parámetros.
+        client.AddParameter("alias", alias);
+
+        // Resultado.
+        var Content = await client.Get<ReadOneResponse<AgentMongoModel>>(cancellationToken: cancellationToken);
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+
     public static async Task<ResponseBase> PostEvent(string ticket, AddTicketEventRequest evento, string token, CancellationToken cancellationToken = default)
     {
 

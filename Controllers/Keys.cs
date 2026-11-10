@@ -55,6 +55,33 @@ public static class Keys
 
 
     /// <summary>
+    /// Elimina una llave.
+    /// </summary>
+    /// <param name="id">ID de la llave</param>
+    /// <param name="token">Token de acceso</param>
+    /// <param name="cancellationToken">Token de cancelación</param>
+    public static async Task<ResponseBase> Delete(int id, string token, CancellationToken cancellationToken = default)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("keys");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Parámetros.
+        client.AddParameter("id", id);
+
+        // Resultado.
+        var Content = await client.Delete<ResponseBase>(cancellationToken: cancellationToken);
+
+        // Retornar.
+        return Content;
+
+    }
+
+
+    /// <summary>
     /// Cambia el estado de una llave.
     /// </summary>
     /// <param name="id">ID de la llave</param>

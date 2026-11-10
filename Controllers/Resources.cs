@@ -501,29 +501,6 @@ public static class Resources
 
 
     /// <summary>
-    /// Confirma el acceso a un recurso.
-    /// </summary>
-    /// <param name="cloud">Token de acceso cloud.</param>
-    /// <param name="cancellationToken">Token de cancelación</param>
-    public static async Task<ResponseBase> Confirm(string cloud, CancellationToken cancellationToken = default)
-    {
-
-        // Cliente HTTP.
-        Client client = Service.GetClient("resources/validations/confirm");
-
-        // Headers.
-        client.AddHeader("cloud", cloud);
-
-        // Resultado.
-        var Content = await client.Patch<ResponseBase>(cancellationToken: cancellationToken);
-
-        // Retornar.
-        return Content;
-    }
-
-
-
-    /// <summary>
     /// Crea un nuevo recurso.
     /// </summary>
     /// <param name="modelo">Modelo del recurso</param>
@@ -542,26 +519,6 @@ public static class Resources
 
         // Resultado.
         var Content = await client.Post<CreateResponse>(userDto, cancellationToken: cancellationToken);
-
-        // Retornar.
-        return Content;
-
-    }
-
-
-    public static async Task<ResponseBase> Update(InviteUserDto userDto, string token, CancellationToken cancellationToken = default)
-    {
-
-        // Cliente HTTP.
-        Client client = Service.GetClient("ResourcesShare");
-
-        client.TimeOut = 60;
-
-        // Headers.
-        client.AddHeader("token", token);
-
-        // Resultado.
-        var Content = await client.Patch<ResponseBase>(userDto, cancellationToken: cancellationToken);
 
         // Retornar.
         return Content;
