@@ -60,6 +60,24 @@ public class Billings
         return Content;
     }
 
+    public static async Task<ReadAllResponse<TransactionDataModel>> ReadAll(string token, CancellationToken cancellationToken = default)
+    {
+
+        // Cliente HTTP.
+        Client client = Service.GetClient("billing/all");
+
+        // Headers.
+        client.AddHeader("token", token);
+
+        // Resultado.
+        var Content = await client.Get<ReadAllResponse<TransactionDataModel>>(cancellationToken: cancellationToken);
+
+        // Retornar.
+        return Content;
+
+    }
+
+
     public static async Task<CreateResponse> Create(string name, BillingAccountTypes types, string token, CancellationToken cancellationToken = default)
     {
 
