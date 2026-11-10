@@ -39,8 +39,36 @@ public static class Resources
     /// Obtiene los recursos asociados a un perfil.
     /// </summary>
     /// <param name="token">Token de acceso</param>
+    /// <param name="baseResource">Recurso base (opcional).</param>
     /// <param name="cancellationToken">Token de cancelación</param>
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token, int? baseResource = null, CancellationToken cancellationToken = default)
+    public static Task<ReadAllResponse<ProjectDataModel>> ReadAllAsync(string token, int? baseResource = null, CancellationToken cancellationToken = default)
+        => ReadAllByTypeAsync(token, null, baseResource, cancellationToken);
+
+
+    public static Task<ReadAllResponse<ProjectDataModel>> ReadAllBases(string token, CancellationToken cancellationToken = default)
+        => ReadAllByTypeAsync(token, "group", null, cancellationToken);
+
+
+    public static Task<ReadAllResponse<ProjectDataModel>> ReadAllPlans(string token, CancellationToken cancellationToken = default)
+        => ReadAllByTypeAsync(token, "plan", null, cancellationToken);
+
+
+    public static Task<ReadAllResponse<ProjectDataModel>> ReadAllConfigurations(string token, CancellationToken cancellationToken = default)
+        => ReadAllByTypeAsync(token, "configuration", null, cancellationToken);
+
+
+    public static Task<ReadAllResponse<ProjectDataModel>> ReadAllVectors(string token, CancellationToken cancellationToken = default)
+        => ReadAllByTypeAsync(token, "vector", null, cancellationToken);
+
+
+    /// <summary>
+    /// Obtiene los recursos filtrados por tipo y/o recurso base.
+    /// </summary>
+    /// <param name="token">Token de acceso</param>
+    /// <param name="type">Tipo de recurso (null para todos).</param>
+    /// <param name="baseResource">Recurso base (opcional).</param>
+    /// <param name="cancellationToken">Token de cancelación</param>
+    private static async Task<ReadAllResponse<ProjectDataModel>> ReadAllByTypeAsync(string token, string? type, int? baseResource, CancellationToken cancellationToken)
     {
 
         // Cliente HTTP.
@@ -49,77 +77,12 @@ public static class Resources
         // Headers.
         client.AddHeader("token", token);
 
+        // Parámetros.
+        if (!string.IsNullOrWhiteSpace(type))
+            client.AddParameter("type", type);
+
         if (baseResource != null)
-        {
             client.AddParameter("baseResource", baseResource.Value);
-        }
-
-        // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
-
-        // Retornar.
-        return Content;
-
-    }
-
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllBases(string token, CancellationToken cancellationToken = default)
-    {
-
-        // Cliente HTTP.
-        Client client = Service.GetClient("resources/groups/all");
-
-        // Headers.
-        client.AddHeader("token", token);
-
-        // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
-
-        // Retornar.
-        return Content;
-
-    }
-
-
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllPlans(string token, CancellationToken cancellationToken = default)
-    {
-        // Cliente HTTP.
-        Client client = Service.GetClient("resources/plans/all");
-
-        // Headers.
-        client.AddHeader("token", token);
-
-        // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
-
-        // Retornar.
-        return Content;
-    }
-
-
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllConfigurations(string token, CancellationToken cancellationToken = default)
-    {
-
-        // Cliente HTTP.
-        Client client = Service.GetClient("resources/configurations/all");
-        // Headers.
-        client.AddHeader("token", token);
-
-        // Resultado.
-        var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
-
-        // Retornar.
-        return Content;
-
-    }
-
-
-    public static async Task<ReadAllResponse<ProjectDataModel>> ReadAllVectors(string token, CancellationToken cancellationToken = default)
-    {
-
-        // Cliente HTTP.
-        Client client = Service.GetClient("resources/vectors/all");
-        // Headers.
-        client.AddHeader("token", token);
 
         // Resultado.
         var Content = await client.Get<ReadAllResponse<ProjectDataModel>>(cancellationToken: cancellationToken);
